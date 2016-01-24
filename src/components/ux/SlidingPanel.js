@@ -130,7 +130,6 @@ var SlidingUpPanel = React.createClass({
           style = {{
             height : this.state.handlerHeight,
             width : deviceWidth,
-            justifyContent : 'center',
             opacity : this.state.handlerOpacity,
             backgroundColor : this.state.handlerBackgroundColor}}
           {...this.panResponder.panHandlers}>

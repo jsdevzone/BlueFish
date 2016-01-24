@@ -10,17 +10,21 @@ import React, { Text, View, StyleSheet, Image, ScrollView, } from 'react-native'
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import SlidingUpPanel from '../ux/SlidingPanel';
 import Dimensions from 'Dimensions';
+import Icon from 'react-native-vector-icons/Ionicons';
 /**
  * Application Components
  */
 import { NewRelease } from './NewRelease';
 import { SongCategories } from './SongCategories';
+import { Titlebar } from '../shared/Titlebar';
+import { SlidingQueue } from '../player/SlidingQueue';
+import { SlidingPlayer } from '../player/SlidingPlayer';
 import { AppStore } from '../../stores/AppStore';
 
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 const DEVICE_WIDTH =  Dimensions.get('window').width;
 const MAX_HEIGHT = DEVICE_HEIGHT - 100;
-const MIN_HEIGHT = 80;
+const MIN_HEIGHT = 100;
 
 /**
  * @class LandingPage
@@ -47,43 +51,52 @@ export class LandingPage extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image source={{uri: 'http://info.umkc.edu/unews/wp-content/uploads/2010/08/eminem-recovery-album-cover.jpg'}} style={styles.landingCover} />
+                <Image source={{uri: 'http://info.umkc.edu/unews/wp-content/uploads/2010/08/eminem-recovery-album-cover.jpg'}} style={styles.landingCover}>
+                    <Titlebar />
+                </Image>
                 <ScrollableTabView>
-        <ScrollView tabLabel="Music">
-            <NewRelease />
-            <NewRelease />
-            <NewRelease />
-        </ScrollView>
-        <View tabLabel="Video" />
-        <View tabLabel="Radio" />
-      </ScrollableTabView>
-
-                    <SlidingUpPanel
-                ref="panel"
-                containerMaximumHeight={MAX_HEIGHT}
-                containerBackgroundColor={'green'}
-                handlerHeight={MIN_HEIGHT}
-                handlerDefaultView={<HandlerOne/>}>
-              <View style={styles.frontContainer}>
-                <Text style={styles.panelText}>Hello guys!</Text>
-              </View>
-            </SlidingUpPanel>
+                    <ScrollView tabLabel="Music">
+                        <NewRelease />
+                        <View style={{backgroundColor: '#FFF', borderWidth: 1,
+                        borderColor: '#D4D4D4', margin: 10, borderRadius: 4}}>
+                            <View style={{flexDirection: 'row', borderBottomColor: '#ECECEC', borderBottomWidth:1}}>
+                                <View style={{flex: 1, flexDirection: 'row', borderRightColor: '#ECECEC', borderRightWidth:1, padding: 10}}>
+                                    <Icon name="ios-musical-notes" style={[styles.playerIcon]} size={35} color="#4F8EF7" />
+                                    <Text style={{fontSize: 18, marginLeft: 5, marginTop: 5}}>New Releases</Text>
+                                </View>
+                                <View style={{flex: 1, flexDirection: 'row', borderRightColor: '#ECECEC', borderRightWidth:0, padding: 10}}>
+                                    <Icon name="levels" style={[styles.playerIcon]} size={35} color="#4F8EF7" />
+                                    <Text style={{fontSize: 18, marginLeft: 5, marginTop: 5}}>Categories</Text>
+                                </View>
+                            </View>
+                            <View style={{flexDirection: 'row'}}>
+                                <View style={{flex: 1, flexDirection: 'row',borderRightColor: '#ECECEC', borderRightWidth:1, padding: 10}}>
+                                    <Icon name="android-wifi" style={[styles.playerIcon]} size={35} color="#4F8EF7" />
+                                    <Text style={{fontSize: 18, marginLeft: 5, marginTop: 5}}>Radio</Text>
+                                </View>
+                                <View style={{flex: 1, flexDirection: 'row',borderRightColor: '#ECECEC', borderRightWidth:0, padding: 10}}>
+                                    <Icon name="steam" style={[styles.playerIcon]} size={35} color="#4F8EF7" />
+                                    <Text style={{fontSize: 18, marginLeft: 5, marginTop: 5}}>Genres</Text>
+                                </View>
+                            </View>
+                        </View>
+                        <NewRelease />
+                        <NewRelease />
+                    </ScrollView>
+                    <View tabLabel="Video" />
+                    <View tabLabel="Radio" />
+                </ScrollableTabView>
+                <SlidingUpPanel
+                    containerMaximumHeight={MAX_HEIGHT}
+                    containerBackgroundColor={'green'}
+                    handlerHeight={MIN_HEIGHT}
+                    handlerDefaultView={<SlidingPlayer/>}>
+                        <SlidingQueue />
+                </SlidingUpPanel>
             </View>
         );
     }
 }
-
-var HandlerOne = React.createClass({
-  render: function() {
-    return (
-      <Image style={styles.image} source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/3/39/Cloud_banner.jpg'}}>
-        <View style={styles.textContainer}>
-          <Text style={styles.handlerText}>Another Sample Text</Text>
-        </View>
-      </Image>
-    );
-  }
-});
 /*
  * @style
  */
@@ -92,7 +105,7 @@ const styles = StyleSheet.create({
          flex: 1,
          padding: 0,
          flexDirection: 'column',
-         backgroundColor: '#ECECEC'
+         backgroundColor: '#EFEEEE'
      },
      landingCover: {
          width: null,

@@ -10,6 +10,8 @@
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
     "react-native": "^0.18.1",
-    "react-native-scrollable-tab-view": "^0.3.4"
+    "react-native-scrollable-tab-view": "^0.3.4",
+    "react-native-slider": "^0.4.0",
+    "react-native-vector-icons": "^1.0.4"
   }
 }
