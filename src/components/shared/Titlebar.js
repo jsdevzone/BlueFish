@@ -34,12 +34,12 @@ export class Titlebar extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Icon name="list" size={65} color="#FFF" style={styles.icon}  />
-                <Text style={styles.title}>Blue Fish Menu</Text>
+                <Icon name="list" size={25} color="#FFF" style={styles.icon}  />
+                <Text style={styles.title}> Menu</Text>
                 <View style={styles.titleFlex}/>
                 <View style={styles.rightWrapper}>
-                    <Icon name="search" size={55} color="#FFF" style={styles.icon}  />
-                    <Icon name="cog" size={55} color="#FFF" style={styles.icon}  />
+                    <Icon name="search" size={25} color="#FFF" style={styles.icon}  />
+                    <Icon name="cog" size={25} color="#FFF" style={styles.icon}  />
                 </View>
             </View>
         );
@@ -59,16 +59,13 @@ const styles = StyleSheet.create({
     },
     icon: {
         color: '#FFF',
-        width: 32,
-        height: 32,
-        fontSize: 30,
         marginLeft: 10,
         marginTop: 5
     },
     title: {
         color: '#FFF',
         fontSize: 20,
-        marginTop: 5
+        marginTop: 2
     },
     titleFlex: {
         flex: 1

@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
     link: {
         padding: 10,
         marginLeft: 10,
-        color: '#888',
-        fontSize: 20
+        color: '#888'
     }
 });

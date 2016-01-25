@@ -14,6 +14,7 @@ import { Titlebar } from './src/components/shared/Titlebar';
 import { NetworkInfo } from './src/components/shared/NetworkInfo';
 import { LandingPage } from './src/components/landing/LandingPage';
 import { DrawerNavigation } from './src/components/landing/DrawerNavigation';
+import { Album } from './src/components/album/Album';
 // Constant imports
 import { LocaleConfig, LocaleString } from './src/constants/LocaleConfig';
 

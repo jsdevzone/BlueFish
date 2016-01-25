@@ -62,15 +62,18 @@ export class SlidingQueue extends React.Component {
     renderRow(rowData, sectionID: number, rowID: number) {
         return (
             <View style={styles.row}>
-                <Image style={styles.cover} source={{uri: rowData.cover}} />
+                <Image style={styles.cover} source={{uri: rowData.cover}}>
+                    <View style={{width:40, height: 40, borderRadius: 20, borderColor:'#FFF', borderWidth: 2, alignItems: 'center', justifyContent: 'center'}}>
+                        <Icon name="ios-play" style={[styles.playerIcon]} size={35} color="#FFF" />
+                    </View>
+                </Image>
                 <View style={styles.titleWrapper}>
                     <View style={{flex: 1}}>
-                        <Text style={{ fontSize: 18, color: '#333'}}>{rowData.title}</Text>
-                        <Text style={{fontSize: 14}}>{rowData.subTitle}</Text>
+                        <Text style={{ fontSize: 14, color: '#333'}}>{rowData.title}</Text>
+                        <Text style={{}}>{rowData.subTitle}</Text>
                     </View>
-                    <View style={{flexDirection: 'row'}}>
-                        <Icon name="ios-cloud" style={[styles.playerIcon, { marginTop: 3}]} size={35} color="#4F8EF7" />
-                        <Icon name="ios-download" style={[styles.playerIcon]} size={35} color="#4F8EF7" />
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginRight: 20}}>
+                        <Icon name="ios-download-outline" style={[styles.playerIcon]} size={25} color="#4F8EF7" />
                     </View>
                 </View>
             </View>
@@ -112,7 +115,9 @@ export class SlidingQueue extends React.Component {
         width: 60,
         height: 60,
         margin: 10,
-        marginTop: 5
+        marginTop: 5,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     titleWrapper: {
         marginTop: 10,
@@ -124,7 +129,6 @@ export class SlidingQueue extends React.Component {
         flexDirection: 'row'
     },
     playerIcon: {
-        marginLeft: 5,
-        marginRight: 10
+        marginLeft: 8
     }
 });

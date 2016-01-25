@@ -6,9 +6,13 @@
  */
  'use strict';
 
-import React, { Text, View, StyleSheet, } from 'react-native';
+import React, { Text, View, StyleSheet, TouchableHighlight } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Slider from 'react-native-slider';
+
+import { parseString } from 'xml2js';
+import { RequestManager } from '../../core/RequestManager';
+
  /**
   * @class SlidingPlayer
   * @extends React.Component
@@ -47,15 +51,23 @@ export class SlidingPlayer extends React.Component {
                     <Text>04:25</Text>
                 </View>
                 <View style={styles.playerControlWrapper}>
-                    <Icon name="ios-shuffle-strong" style={[styles.playerIcon, { marginRight: 25}]} size={35} color="#4F8EF7" />
+                    <TouchableHighlight onPress={()=>{
+                        RequestManager.get('http://www.bhatkallys.com/services/ualatest/audioXml.php?lang=ur&stcnt=0&encnt=10&filtertype=audio').then(response=>{
+                            parseString(response, (error, result) => {
+                                console.log(result);
+                            })
+                        });
+                    }}>
+                        <Icon name="ios-shuffle-strong" style={[styles.playerIcon, { marginRight: 25}]} size={35} color="#4F8EF7" />
+                    </TouchableHighlight>
                     <View style={{flex: 1}}></View>
                     <Icon name="ios-rewind" style={[styles.playerIcon, { marginRight: 25}]} size={35} color="#4F8EF7" />
-                    <View style={{borderRadius: 25, alignItems: 'center', paddingTop: 8, paddingLeft: 4, width:50, height: 50, borderColor: '#E2E2E2', borderWidth: 1}}>
+                    <View style={{borderRadius: 25, alignItems: 'center', paddingTop: 6, paddingLeft: 6, width:50, height: 50, borderColor: '#E2E2E2', borderWidth: 1}}>
                         <Icon name="play" size={35} style={styles.playerIcon} color="#4F8EF7" />
                     </View>
                     <Icon name="ios-fastforward" style={[styles.playerIcon, { marginLeft: 25}]} size={35} color="#4F8EF7" />
                     <View style={{flex: 1}}></View>
-                    <Icon name="ios-infinite" style={[styles.playerIcon, { marginRight: 25}]} size={35} color="#4F8EF7" />
+                    <Icon name="ios-infinite" style={[styles.playerIcon, { marginRight: 5}]} size={35} color="#4F8EF7" />
                 </View>
             </View>
         );

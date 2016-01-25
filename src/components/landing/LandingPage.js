@@ -62,21 +62,21 @@ export class LandingPage extends React.Component {
                             <View style={{flexDirection: 'row', borderBottomColor: '#ECECEC', borderBottomWidth:1}}>
                                 <View style={{flex: 1, flexDirection: 'row', borderRightColor: '#ECECEC', borderRightWidth:1, padding: 10}}>
                                     <Icon name="ios-musical-notes" style={[styles.playerIcon]} size={35} color="#4F8EF7" />
-                                    <Text style={{fontSize: 18, marginLeft: 5, marginTop: 5}}>New Releases</Text>
+                                    <Text style={{ marginLeft: 5, marginTop: 5}}>New Releases</Text>
                                 </View>
                                 <View style={{flex: 1, flexDirection: 'row', borderRightColor: '#ECECEC', borderRightWidth:0, padding: 10}}>
                                     <Icon name="levels" style={[styles.playerIcon]} size={35} color="#4F8EF7" />
-                                    <Text style={{fontSize: 18, marginLeft: 5, marginTop: 5}}>Categories</Text>
+                                    <Text style={{ marginLeft: 5, marginTop: 5}}>Categories</Text>
                                 </View>
                             </View>
                             <View style={{flexDirection: 'row'}}>
                                 <View style={{flex: 1, flexDirection: 'row',borderRightColor: '#ECECEC', borderRightWidth:1, padding: 10}}>
                                     <Icon name="android-wifi" style={[styles.playerIcon]} size={35} color="#4F8EF7" />
-                                    <Text style={{fontSize: 18, marginLeft: 5, marginTop: 5}}>Radio</Text>
+                                    <Text style={{ marginLeft: 5, marginTop: 5}}>Radio</Text>
                                 </View>
                                 <View style={{flex: 1, flexDirection: 'row',borderRightColor: '#ECECEC', borderRightWidth:0, padding: 10}}>
                                     <Icon name="steam" style={[styles.playerIcon]} size={35} color="#4F8EF7" />
-                                    <Text style={{fontSize: 18, marginLeft: 5, marginTop: 5}}>Genres</Text>
+                                    <Text style={{ marginLeft: 5, marginTop: 5}}>Genres</Text>
                                 </View>
                             </View>
                         </View>
