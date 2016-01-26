@@ -26,16 +26,22 @@ export class CoverTile extends React.Component {
         this.state = {};
     }
 
+    getPropsValue(key) {
+        if(this.props.cover[key] && this.props.cover[key].length > 0)
+            return this.props.cover[key][0];
+    }
+
     /**
      * @render
      * @return {View} container
      */
     render() {
+        let coverImage = "http://bhatkallys.com/wp-content/uploads/sermons/images/" + this.getPropsValue('image');
         return (
             <View style={styles.container}>
-                <Image source={{uri: this.props.cover.cover}} style={styles.coverImage} />
-                <Text style={styles.title}>{this.props.cover.title}</Text>
-                <Text style={styles.subTitle}>{this.props.cover.subTitle}</Text>
+                <Image source={{uri: coverImage}} style={styles.coverImage} />
+                <Text style={styles.title}>{this.getPropsValue('audio_title')}</Text>
+                <Text style={styles.subTitle}>{this.getPropsValue('preacher_name')}</Text>
             </View>
         );
     }

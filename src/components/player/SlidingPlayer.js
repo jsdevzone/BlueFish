@@ -46,18 +46,12 @@ export class SlidingPlayer extends React.Component {
                             trackStyle={styles.track}
                             thumbStyle={styles.thumb}
                             minimumTrackTintColor='#31a4db'
-                        thumbTouchSize={{width: 50, height: 40}} />
+                            thumbTouchSize={{width: 50, height: 40}} />
                     </View>
                     <Text>04:25</Text>
                 </View>
                 <View style={styles.playerControlWrapper}>
-                    <TouchableHighlight onPress={()=>{
-                        RequestManager.get('http://www.bhatkallys.com/services/ualatest/audioXml.php?lang=ur&stcnt=0&encnt=10&filtertype=audio').then(response=>{
-                            parseString(response, (error, result) => {
-                                console.log(result);
-                            })
-                        });
-                    }}>
+                    <TouchableHighlight>
                         <Icon name="ios-shuffle-strong" style={[styles.playerIcon, { marginRight: 25}]} size={35} color="#4F8EF7" />
                     </TouchableHighlight>
                     <View style={{flex: 1}}></View>

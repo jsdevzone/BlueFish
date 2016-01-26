@@ -24,14 +24,23 @@ export class NewRelease extends React.Component {
         /**
          * @state
          */
-        this.state = {};
+        this.state = {
+            dataSource: []
+        };
+    }
+
+    componentDidMount() {
+        CategoryStore.getLatestAlbums().then(json => {
+            this.setState({ dataSource: json.Audios.Audio });
+        });
     }
 
     /**
-     *
+     * Render each cover in the state array
+     * @return {Array<CoverTile>} covers
      */
     renderCovers() {
-        return CategoryStore.getTrendingList().map((item, index) => {
+        return this.state.dataSource.map((item, index) => {
             return <CoverTile key={index} cover={item} />
         });
     }
@@ -44,7 +53,7 @@ export class NewRelease extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={styles.titleWrapper}>
-                    <Text style={styles.title}>New & Trending</Text>
+                    <Text style={styles.title}>Latest</Text>
                 </View>
                 <ScrollView  showsHorizontalScrollIndicator={false} style={styles.container} horizontal={true}>
                     {this.renderCovers()}
