@@ -6,7 +6,7 @@
  */
  'use strict';
 
-import React, { Text, View, StyleSheet, TouchableHighlight } from 'react-native';
+import React, { Text, View, StyleSheet, TouchableHighlight, NativeModules } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Slider from 'react-native-slider';
 
@@ -30,6 +30,13 @@ export class SlidingPlayer extends React.Component {
          */
         this.state = {};
     }
+//play amarthumbo play aakunnundo enn nokk
+//ok?
+
+    // playSong() {
+    //     let url = "http://bhatkallys.com/wp-content/uploads/sermons/03 Tilkar Rusul.mp3";
+    //     NativeModules.MediaHelper.play(url, ()=>{});
+    // }
 
     /**
      * @render
@@ -56,9 +63,11 @@ export class SlidingPlayer extends React.Component {
                     </TouchableHighlight>
                     <View style={{flex: 1}}></View>
                     <Icon name="ios-rewind" style={[styles.playerIcon, { marginRight: 25}]} size={35} color="#4F8EF7" />
-                    <View style={{borderRadius: 25, alignItems: 'center', paddingTop: 6, paddingLeft: 6, width:50, height: 50, borderColor: '#E2E2E2', borderWidth: 1}}>
-                        <Icon name="play" size={35} style={styles.playerIcon} color="#4F8EF7" />
-                    </View>
+                    <TouchableHighlight >
+                        <View style={{borderRadius: 25, alignItems: 'center', paddingTop: 6, paddingLeft: 6, width:50, height: 50, borderColor: '#E2E2E2', borderWidth: 1}}>
+                          <Icon name="play" size={35} style={styles.playerIcon} color="#4F8EF7" />
+                        </View>
+                    </TouchableHighlight>
                     <Icon name="ios-fastforward" style={[styles.playerIcon, { marginLeft: 25}]} size={35} color="#4F8EF7" />
                     <View style={{flex: 1}}></View>
                     <Icon name="ios-infinite" style={[styles.playerIcon, { marginRight: 5}]} size={35} color="#4F8EF7" />
