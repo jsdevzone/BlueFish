@@ -13,7 +13,7 @@ import { CategoryStore } from '../../stores/CategoryStore';
  * @class NewRelease
  * @extends React.Component
  */
-export class NewRelease extends React.Component {
+export class Categories extends React.Component {
 
     /**
      * @constructor
@@ -29,9 +29,16 @@ export class NewRelease extends React.Component {
         };
     }
 
+    getPropsValue(obj, key) {
+        if(obj[key] && obj[key].length > 0)
+            return obj[key][0];
+        else
+            return null;
+    }
+
     componentDidMount() {
-        CategoryStore.getLatestAlbums().then(json => {
-            this.setState({ dataSource: json.Audios.Audio });
+        CategoryStore.getCategories().then(json => {
+            this.setState({ dataSource: json.Categories.Category });
         });
     }
 
@@ -41,7 +48,11 @@ export class NewRelease extends React.Component {
      */
     renderCovers() {
         return this.state.dataSource.map((item, index) => {
-            return <CoverTile key={index} cover={item} />
+            return (
+                <View key={index} style={{width: 150, margin: 10, borderColor: '#F4F4F4', borderWidth: 1, padding: 10, alignItems: 'center', justifyContent: 'center'}}>
+                    <Text>{this.getPropsValue(item, 'category_name')}</Text>
+                </View>
+            )
         });
     }
 
@@ -52,9 +63,7 @@ export class NewRelease extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <ScrollView  showsHorizontalScrollIndicator={false} style={styles.container} horizontal={false}>
-                    {this.renderCovers()}
-                </ScrollView>
+                {this.renderCovers()}
             </View>
         );
     }
@@ -65,7 +74,8 @@ export class NewRelease extends React.Component {
  */
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'column',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
         padding: 5,
         backgroundColor: '#FFF'
     },

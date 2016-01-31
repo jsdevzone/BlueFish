@@ -19,12 +19,13 @@ import { SongCategories } from './SongCategories';
 import { Titlebar } from '../shared/Titlebar';
 import { SlidingQueue } from '../player/SlidingQueue';
 import { SlidingPlayer } from '../player/SlidingPlayer';
+import { Categories } from './Categories';
 import { AppStore } from '../../stores/AppStore';
 
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 const DEVICE_WIDTH =  Dimensions.get('window').width;
 const MAX_HEIGHT = DEVICE_HEIGHT - 100;
-const MIN_HEIGHT = 100;
+const MIN_HEIGHT = 60;
 
 /**
  * @class LandingPage
@@ -51,40 +52,25 @@ export class LandingPage extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image source={{uri: 'http://info.umkc.edu/unews/wp-content/uploads/2010/08/eminem-recovery-album-cover.jpg'}} style={styles.landingCover}>
-                    <Titlebar />
-                </Image>
+            <Titlebar />
+                <Image source={{uri: 'http://thumbs.dreamstime.com/t/fresh-green-grass-panorama-natural-blur-nature-background-light-sparkles-glitter-super-high-resolution-premium-quality-50458661.jpg'}} style={styles.landingCover}/>
                 <ScrollableTabView>
                     <ScrollView tabLabel="Music">
+                        <View style={{padding: 14,borderBottomWidth: 1, borderBottomColor:"#E1E1EE"}}>
+                            <Text>New Releases</Text>
+                        </View>
                         <NewRelease />
-                        <View style={{backgroundColor: '#FFF', borderWidth: 1,
-                        borderColor: '#D4D4D4', margin: 10, borderRadius: 4}}>
-                            <View style={{flexDirection: 'row', borderBottomColor: '#ECECEC', borderBottomWidth:1}}>
-                                <View style={{flex: 1, flexDirection: 'row', borderRightColor: '#ECECEC', borderRightWidth:1, padding: 10}}>
-                                    <Icon name="ios-musical-notes" style={[styles.playerIcon]} size={35} color="#4F8EF7" />
-                                    <Text style={{ marginLeft: 5, marginTop: 5}}>New Releases</Text>
-                                </View>
-                                <View style={{flex: 1, flexDirection: 'row', borderRightColor: '#ECECEC', borderRightWidth:0, padding: 10}}>
-                                    <Icon name="levels" style={[styles.playerIcon]} size={35} color="#4F8EF7" />
-                                    <Text style={{ marginLeft: 5, marginTop: 5}}>Categories</Text>
-                                </View>
-                            </View>
-                            <View style={{flexDirection: 'row'}}>
-                                <View style={{flex: 1, flexDirection: 'row',borderRightColor: '#ECECEC', borderRightWidth:1, padding: 10}}>
-                                    <Icon name="android-wifi" style={[styles.playerIcon]} size={35} color="#4F8EF7" />
-                                    <Text style={{ marginLeft: 5, marginTop: 5}}>Radio</Text>
-                                </View>
-                                <View style={{flex: 1, flexDirection: 'row',borderRightColor: '#ECECEC', borderRightWidth:0, padding: 10}}>
-                                    <Icon name="steam" style={[styles.playerIcon]} size={35} color="#4F8EF7" />
-                                    <Text style={{ marginLeft: 5, marginTop: 5}}>Genres</Text>
-                                </View>
-                            </View>
+                        <View style={{padding: 14, borderTopWidth: 1, borderTopColor:'#E1E1E1',borderBottomWidth: 1, borderBottomColor:"#E1E1EE"}}>
+                            <Text>New Releases</Text>
                         </View>
                         <NewRelease />
                         <NewRelease />
                     </ScrollView>
-                    <View tabLabel="Video" />
-                    <View tabLabel="Radio" />
+                    <ScrollView tabLabel="Categories">
+                        <Categories />
+                    </ScrollView>
+                    <View tabLabel="Author" />
+                    <View tabLabel="Topics" />
                 </ScrollableTabView>
                 <SlidingUpPanel
                     containerMaximumHeight={MAX_HEIGHT}
@@ -105,7 +91,7 @@ const styles = StyleSheet.create({
          flex: 1,
          padding: 0,
          flexDirection: 'column',
-         backgroundColor: '#EFEEEE'
+         backgroundColor: '#FFF'
      },
      landingCover: {
          width: null,

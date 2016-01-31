@@ -7,7 +7,7 @@
  'use strict';
 
 import React, { Text, View, StyleSheet, } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
 
  /**
   * @class Titlebar
@@ -34,12 +34,11 @@ export class Titlebar extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Icon name="list" size={25} color="#FFF" style={styles.icon}  />
+                <Icon name="ios-list-outline" size={25} color="#FFF" style={styles.icon}  />
                 <Text style={styles.title}> Menu</Text>
                 <View style={styles.titleFlex}/>
                 <View style={styles.rightWrapper}>
                     <Icon name="search" size={25} color="#FFF" style={styles.icon}  />
-                    <Icon name="cog" size={25} color="#FFF" style={styles.icon}  />
                 </View>
             </View>
         );
@@ -51,11 +50,13 @@ export class Titlebar extends React.Component {
  */
 const styles = StyleSheet.create({
     container: {
-        height: 55,
+        height: 65,
         flexDirection: 'row',
         padding: 5,
         paddingLeft: 10,
-        paddingRight: 10
+        paddingRight: 10,
+        backgroundColor: '#14324A',
+        alignItems: 'center'
     },
     icon: {
         color: '#FFF',
@@ -65,13 +66,15 @@ const styles = StyleSheet.create({
     title: {
         color: '#FFF',
         fontSize: 20,
-        marginTop: 2
+        marginTop: 2,
+        fontFamily: 'Tahoma'
     },
     titleFlex: {
         flex: 1
     },
     rightWrapper: {
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginRight: 10
     }
 });

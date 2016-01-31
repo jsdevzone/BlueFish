@@ -27,5 +27,13 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
      */
     getSettings: function() {
 
+    },
+    /**
+     * Start playback
+     * @param {Playback} playback
+     * @return {Void} undefined
+     */
+    startPlayback: function(playback) {
+        this.emit('playbackstarted', playback);
     }
 });

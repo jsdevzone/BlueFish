@@ -6,12 +6,12 @@
  */
  'use strict';
 
-import React, { Text, View, StyleSheet, TouchableHighlight, NativeModules } from 'react-native';
+import React, { Text, View, StyleSheet, TouchableHighlight, ToastAndroid,
+    TouchableWithoutFeedback, NativeModules, Image, } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Slider from 'react-native-slider';
 
-import { parseString } from 'xml2js';
-import { RequestManager } from '../../core/RequestManager';
+import { AppStore } from '../../stores/AppStore';
 
  /**
   * @class SlidingPlayer
@@ -28,51 +28,54 @@ export class SlidingPlayer extends React.Component {
         /**
          * @state
          */
-        this.state = {};
-    }
-//play amarthumbo play aakunnundo enn nokk
-//ok?
+        this.state = {
+            playback: {},
+            isPlaying: false
+        };
 
-    // playSong() {
-    //     let url = "http://bhatkallys.com/wp-content/uploads/sermons/03 Tilkar Rusul.mp3";
-    //     NativeModules.MediaHelper.play(url, ()=>{});
-    // }
+        AppStore.on('playbackstarted', this.onPlaybackStarted.bind(this));
+    }
+
+    processMedia() {
+        if(this.state.isPlaying) {
+            NativeModules.MediaHelper.pause();
+            this.setState({ isPlaying: false });
+        }
+        else{
+            NativeModules.MediaHelper.resume();
+            this.setState({ isPlaying: true });
+        }
+    }
+
+    onPlaybackStarted(playback) {
+        this.setState({ playback: playback, isPlaying: true });
+    }
+
+    getPropsValue(obj, key) {
+        if(obj[key] && obj[key].length > 0)
+            return obj[key][0];
+    }
 
     /**
      * @render
      * @return {View} container
      */
     render() {
+        let coverImage = "http://bhatkallys.com/wp-content/uploads/sermons/images/" + this.getPropsValue(this.state.playback, 'image');
+        let icon = this.state.isPlaying ? "ios-pause" : "ios-play";
         return (
-            <View style={styles.container}>
-                <View style={styles.progressBarWrapper}>
-                    <Text>00:02</Text>
-                    <View style={{flex: 1}}>
-                        <Slider
-                            style={styles.slider}
-                            trackStyle={styles.track}
-                            thumbStyle={styles.thumb}
-                            minimumTrackTintColor='#31a4db'
-                            thumbTouchSize={{width: 50, height: 40}} />
+            <Image source={{uri:'http://supercolortuts.com/Tuts_Files/Tutorials/Perfect_iOS_7_Style_Blur_Background/Perfect_iOS_7_Style_Blur_Background_010.jpg'}} style={styles.container}>
+                <Image source={{uri: coverImage}} style={styles.cover} />
+                <View style={styles.titleContainer}>
+                    <Text style={styles.title}>{this.getPropsValue(this.state.playback, 'audio_title')}</Text>
+                    <Text style={styles.subTitle}>{this.getPropsValue(this.state.playback, 'preacher_name')}</Text>
+                </View>
+                <TouchableWithoutFeedback onPress={this.processMedia.bind(this)}>
+                    <View style={styles.buttonContainer}>
+                        <Icon name={icon} color="#FFF" size={25} />
                     </View>
-                    <Text>04:25</Text>
-                </View>
-                <View style={styles.playerControlWrapper}>
-                    <TouchableHighlight>
-                        <Icon name="ios-shuffle-strong" style={[styles.playerIcon, { marginRight: 25}]} size={35} color="#4F8EF7" />
-                    </TouchableHighlight>
-                    <View style={{flex: 1}}></View>
-                    <Icon name="ios-rewind" style={[styles.playerIcon, { marginRight: 25}]} size={35} color="#4F8EF7" />
-                    <TouchableHighlight >
-                        <View style={{borderRadius: 25, alignItems: 'center', paddingTop: 6, paddingLeft: 6, width:50, height: 50, borderColor: '#E2E2E2', borderWidth: 1}}>
-                          <Icon name="play" size={35} style={styles.playerIcon} color="#4F8EF7" />
-                        </View>
-                    </TouchableHighlight>
-                    <Icon name="ios-fastforward" style={[styles.playerIcon, { marginLeft: 25}]} size={35} color="#4F8EF7" />
-                    <View style={{flex: 1}}></View>
-                    <Icon name="ios-infinite" style={[styles.playerIcon, { marginRight: 5}]} size={35} color="#4F8EF7" />
-                </View>
-            </View>
+                </TouchableWithoutFeedback>
+            </Image>
         );
     }
 
@@ -83,52 +86,35 @@ export class SlidingPlayer extends React.Component {
  */
  const styles = StyleSheet.create({
     container: {
-        flexDirection: 'column',
-        alignItems: 'stretch',
-        height: 100,
-        borderTopColor: '#E1E1E1',
-        borderTopWidth: 1
+        height: 60,
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingLeft: 10,
+        paddingRight: 10
     },
     cover: {
-        width: 50,
-        backgroundColor: 'red'
+        height: 40,
+        width: 40,
+        backgroundColor: '#FFF'
     },
-    progressBarWrapper: {
-        padding: 5,
-        borderTopColor: '#F5F5F5',
-        borderBottomColor: '#F5F5F5',
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
-        flexDirection: 'row'
-    },
-    slider: {
-        height: 20,
+    titleContainer: {
+        flexDirection: 'column',
         marginLeft: 10,
-        marginRight: 10
+        flex: 1
     },
-    track: {
-        height: 2,
-        backgroundColor: '#989899',
+    title: {
+        color: '#FFF',
+        fontWeight: 'bold'
     },
-    thumb: {
-        width: 10,
-        height: 10,
-        backgroundColor: '#31a4db',
-        borderRadius: 10 / 2,
-        shadowColor: '#31a4db',
-        shadowOffset: {width: 0, height: 0},
-        shadowRadius: 2,
-        shadowOpacity: 1,
+    subTitle: {
+        color: '#E1E1E1'
     },
-    playerControlWrapper: {
-        padding: 5,
+    buttonContainer: {
         paddingLeft: 10,
         paddingRight: 10,
-        flexDirection: 'row',
         alignItems: 'center'
     },
-    playerIcon: {
-        marginLeft: 5,
-        marginRight: 5
+    button: {
+        color: '#FFF'
     }
 });

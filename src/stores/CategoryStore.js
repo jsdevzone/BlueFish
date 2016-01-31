@@ -36,5 +36,17 @@ export var CategoryStore = Object.assign({}, EventEmitter.prototype, {
         };
         let promise = RequestManager.get(params);
         return promise;
+    },
+
+    getCategories: function() {
+        let params = {
+            lang: 'en',
+            stcnt: 0,
+            encnt: 500,
+            listtype: 'category',
+            subfilter: ''
+        };
+        let promise = RequestManager.get(params);
+        return promise;
     }
 });

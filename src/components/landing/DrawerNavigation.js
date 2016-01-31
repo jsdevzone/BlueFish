@@ -27,317 +27,195 @@ export class DrawerNavigation extends React.Component {
     }
 
     /**
+     * Render single navigation item
+     * @param {String} text
+     * @return {View} Component
+     */
+     renderNavigationItem(text) {
+         return (
+             <View style={styles.navItem}>
+                <Text style={styles.navItemText}>{text}</Text>
+             </View>
+         );
+     }
+
+    /**
      * @render
      * @return {View} container
      */
     render() {
         return (
-
+            <ScrollView style={{flex: 1}}>
             <View style={styles.container}>
-                <Image style={styles.profile} source={{ uri: 'http://www.download-free-wallpaper.com/img58/wptatzopoqobwbybalqj.png' }} >
-                  <Image style={styles.round} source={{ uri: 'http://www.masterfile.com/images/home/6118-08023773.jpg' }}/>
-                  <Text style={styles.headtext}></Text>
-                </Image>
-
-                <ScrollView style={{flex: 1}}>
-                <HomeNav />
-                <AudioNav/>
-
-
-            <TouchableWithoutFeedback>
-                <View style={styles.link}>
-                    <Icon name="video-camera"  size={15} color="#888" style={styles.linkIcon}></Icon>
-                    <Text style={styles.linkText}>VIDEOS</Text>
+                <View style={styles.header}>
+                    <Text style={styles.headerText}>Home</Text>
                 </View>
-            </TouchableWithoutFeedback>
-
-            <TouchableWithoutFeedback>
-                <View style={styles.link}>
-                    <Icon name="info-circle"  size={15} color="#888" style={styles.linkIcon}></Icon>
-                    <Text style={styles.linkText}>HELP</Text>
-                </View>
-            </TouchableWithoutFeedback>
-
-                <View>
-                    <View style={styles.share}>
-                        <Text style={styles.sharelinkText}>SHARE</Text>
-                        <Icon name="thumbs-o-up"  size={15} color="#888" style={styles.sharelinkIcon}></Icon>
+                <View style={[styles.navCategoryWrapper]}>
+                    <View style={styles.navCategoryRow}>
+                        <View style={styles.navItem}>
+                            <Icon name="home" color="#FFF" size={35} />
+                            <Text style={styles.navItemText}>Home</Text>
+                        </View>
+                        <View style={styles.navItem}>
+                            <Icon name="info-circle" color="#FFF" size={35} />
+                            <Text style={styles.navItemText}>About Us</Text>
+                        </View>
                     </View>
-
-            <TouchableWithoutFeedback>
-                <View style={styles.segment}>
-                    <Icon name="facebook-square"  size={18} color="#888" style={styles.innerIcon}></Icon>
-                    <Text style={styles.linkText}>FACEBOOK</Text>
                 </View>
-            </TouchableWithoutFeedback>
-
-            <TouchableWithoutFeedback>
-                <View style={styles.segment}>
-                    <Icon name="twitter"  size={18} color="#888" style={styles.innerIcon}></Icon>
-                    <Text style={styles.linkText}>TWITTER</Text>
+                <View style={[styles.navCategoryWrapper, { borderTopWidth: 0}]}>
+                    <View style={styles.navCategoryRow}>
+                        <View style={styles.navItem}>
+                            <Icon name="phone" color="#FFF" size={35} />
+                            <Text style={styles.navItemText}>Contact Us</Text>
+                        </View>
+                        <View style={styles.navItem}>
+                            <Icon name="comment" color="#FFF" size={35} />
+                            <Text style={styles.navItemText}>Feedback</Text>
+                        </View>
+                    </View>
                 </View>
-            </TouchableWithoutFeedback>
-
-            <TouchableWithoutFeedback>
-                <View style={styles.segment}>
-                    <Icon name="google-plus"  size={18} color="#888" style={styles.innerIcon}></Icon>
-                    <Text style={styles.linkText}>GOOGLE+</Text>
+                <View style={styles.header}>
+                    <Text style={styles.headerText}>Audios</Text>
                 </View>
-            </TouchableWithoutFeedback>
-
-            <TouchableWithoutFeedback>
-                <View style={styles.segment}>
-                    <Icon name="envelope"  size={18} color="#888" style={styles.innerIcon}></Icon>
-                    <Text style={styles.linkText}>E-MAIL</Text>
+                <View style={[styles.navCategoryWrapper]}>
+                    <View style={styles.navCategoryRow}>
+                        <View style={styles.navItem}>
+                            <Icon name="music" color="#FFF" size={35} />
+                            <Text style={styles.navItemText}>Lastest</Text>
+                        </View>
+                        <View style={styles.navItem}>
+                            <Icon name="user" color="#FFF" size={35} />
+                            <Text style={styles.navItemText}>Categories</Text>
+                        </View>
+                    </View>
                 </View>
-            </TouchableWithoutFeedback>
+                <View style={[styles.navCategoryWrapper, { borderTopWidth: 0}]}>
+                    <View style={styles.navCategoryRow}>
+                        <View style={styles.navItem}>
+                            <Icon name="file-text" color="#FFF" size={35} />
+                            <Text style={styles.navItemText}>Author</Text>
+                        </View>
+                        <View style={styles.navItem}>
+                            <Icon name="tasks" color="#FFF" size={35} />
+                            <Text style={styles.navItemText}>Topics</Text>
+                        </View>
+                    </View>
                 </View>
-
-                </ScrollView>
-
+                <View style={styles.header}>
+                    <Text style={styles.headerText}>Other</Text>
+                </View>
+                <View style={[styles.navCategoryWrapper]}>
+                    <View style={styles.navCategoryRow}>
+                        <View style={styles.navItem}>
+                            <Icon name="video-camera" color="#FFF" size={35} />
+                            <Text style={styles.navItemText}>Videos </Text>
+                        </View>
+                        <View style={styles.navItem}>
+                            <Icon name="heart" color="#FFF" size={35} />
+                            <Text style={styles.navItemText}>Favourites</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={styles.socialIconsWrapper}>
+                    <View style={styles.socialIcon}>
+                        <Icon name="facebook" size={18} color="#FFF" />
+                    </View>
+                    <View style={styles.socialIcon}>
+                        <Icon name="twitter" size={18} color="#FFF" />
+                    </View>
+                    <View style={styles.socialIcon}>
+                        <Icon name="instagram" size={18} color="#FFF" />
+                    </View>
+                    <View style={styles.socialIcon}>
+                        <Icon name="google" size={18} color="#FFF" />
+                    </View>
+                </View>
+                <View style={styles.helpBtn}>
+                    <View style={styles.helpBtnIcon}>
+                        <Icon name="question" color="#FFF" size={18} />
+                    </View>
+                    <Text style={styles.helpBtnText}>Help</Text>
+                </View>
             </View>
+            </ScrollView>
         );
     }
 }
-
-/**
- * @class HomeNav
- * @extends React.Component
- */
- class HomeNav extends React.Component {
-     /**
-      * @constructor
-      */
-      constructor() {
-          super();
-
-          /**
-           * @state
-           */
-           this.state = {
-               isCollapsed: true
-           };
-      }
-
-      /**
-       * @eventhandler
-       * @return {Void} undefin
-       */
-      onLinkPress() {
-          let collapsed = this.state.isCollapsed;
-          this.setState({ isCollapsed: !collapsed });
-      }
-
-      /**
-       * @render
-       * @return {View} component
-       */
-      render() {
-          let segments = (
-              <View>
-              <TouchableWithoutFeedback>
-                    <View style={styles.segment}>
-                        <Icon name="info-circle"  size={15} color="#888" style={styles.innerIcon}></Icon>
-                        <Text style={styles.linkText} size={12}>ABOUT US</Text>
-                    </View>
-                </TouchableWithoutFeedback>
-
-                <TouchableWithoutFeedback>
-                    <View style={styles.segment}>
-                        <Icon name="phone"  size={15} color="#888" style={styles.innerIcon}></Icon>
-                        <Text style={styles.linkText} size={12}>CONTACT US</Text>
-                    </View>
-                </TouchableWithoutFeedback>
-
-                <TouchableWithoutFeedback>
-                    <View style={styles.segment}>
-                        <Icon name="comment"  size={15} color="#888" style={styles.innerIcon}></Icon>
-                        <Text style={styles.linkText} size={12}>FEEDBACK</Text>
-                    </View>
-                </TouchableWithoutFeedback>
-              </View>
-          );
-
-          if(this.state.isCollapsed) {
-              segments = null;
-          }
-
-          return (
-              <View>
-                <TouchableWithoutFeedback onPress={this.onLinkPress.bind(this)}>
-                    <View style={styles.link}>
-                        <Icon name="home" size={18} color="#888" style={styles.linkIcon} />
-                        <Text style={styles.linkText}>HOME</Text>
-                    </View>
-                </TouchableWithoutFeedback>
-                { segments }
-             </View>
-          );
-      }
- }
-
- /**
- * @class AudioNav
- * extends class react.component
- **/
-
- class AudioNav extends React.Component{
-
-/**
-* @constructor
-**/
-
- constructor()
- {
-    super();
-
-    /**
-    * @state
-    **/
-
-    this.state={
-        isCollapsed : true
-    };
-}
-
-
-/**
- * @eventhandler
- * @return {Void} undefin
- */
- onLinkPress()
- {
-    let collapsed = this.state.isCollapsed;
-    this.setState({ isCollapsed: !collapsed });
-}
-
-/**
- * @render
- * @return {View} component
- */
-
- render(){
-    let segments = (
-        <View>
-            <TouchableWithoutFeedback>
-                <View style={styles.segment}>
-                    <Icon name="music"  size={15} color="#888" style={styles.innerIcon}></Icon>
-                    <Text style={styles.linkText} size={12}>LATEST</Text>
-                </View>
-            </TouchableWithoutFeedback>
-
-            <TouchableWithoutFeedback>
-                <View style={styles.segment}>
-                    <Icon name="user"  size={15} color="#888" style={styles.innerIcon}></Icon>
-                    <Text style={styles.linkText} size={12}>AUTHORS</Text>
-                </View>
-            </TouchableWithoutFeedback>
-
-            <TouchableWithoutFeedback>
-                <View style={styles.segment}>
-                    <Icon name="file-text"  size={15} color="#888" style={styles.innerIcon}></Icon>
-                    <Text style={styles.linkText} size={12}>TOPICS</Text>
-                </View>
-            </TouchableWithoutFeedback>
-
-            <TouchableWithoutFeedback>
-                <View style={styles.segment}>
-                    <Icon name="tasks"  size={15} color="#888" style={styles.innerIcon}></Icon>
-                    <Text style={styles.linkText} size={12}>CATEGORY</Text>
-                </View>
-            </TouchableWithoutFeedback>
-
-            <TouchableWithoutFeedback>
-                <View style={styles.segment}>
-                    <Icon name="heart"  size={15} color="#888" style={styles.innerIcon}></Icon>
-                    <Text style={styles.linkText} size={12}>FAVOURITES(DOWNLOADED)</Text>
-                </View>
-            </TouchableWithoutFeedback>
-        </View>
-    );
-
-    if(this.state.isCollapsed)
-    {
-        segments = null;
-    }
- return(
-    <View>
-        <TouchableWithoutFeedback onPress={this.onLinkPress.bind(this)}>
-            <View style={styles.link}>
-                <Icon name="volume-up"  size={15} color="#888" style={styles.linkIcon}></Icon>
-                <Text style={styles.linkText}>AUDIOS</Text>
-            </View>
-        </TouchableWithoutFeedback>
-    { segments }
-    </View>
-)
-
-
-}
-
-
- }
 
 /**
  * @style
  */
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         flexDirection: 'column',
-        backgroundColor:'#f8f8ff',
+        backgroundColor:'#14324A',
     },
-    profile: {
-        height: 120,
-        backgroundColor: '#3fbd5a',
-        justifyContent: 'center',
-        alignItems: 'center'
+    header: {
+        padding: 5,
+        backgroundColor: '#253C54'
     },
-    segment: {
-      padding: 10,
-      marginLeft:10,
-      marginRight: 10,
-      flexDirection: 'row'
+    headerText: {
+        color: '#FFF',
+        marginLeft: 10
     },
-    link: {
-        padding: 15,
-        marginLeft:10,
-        marginRight: 10,
+    navCategoryWrapper: {
+        borderTopWidth: 1,
         borderBottomWidth: 1,
-        borderBottomColor: '#ececec',
+        borderColor: '#10263D'
+    },
+    navCategoryRow: {
         flexDirection: 'row'
     },
-    linkText: {
-      marginLeft: 10,
-      color: '#888'
+    navItem: {
+        flex: 1,
+        borderColor: '#10263D',
+        borderRightWidth: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 10
     },
-    round: {
-        width :50,
-        height:50,
-        borderRadius:25,
+    navItemText: {
+        color: '#FFF',
+        fontFamily: 'Tahoma',
+        fontSize: 13
     },
-    linkIcon: {
+    helpBtn: {
+        padding: 10,
+        backgroundColor: '#253C54',
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row'
+    },
+    helpBtnText: {
+        color: '#FFF',
+        fontSize: 16
+    },
+    helpBtnIcon: {
+        width: 30,
+        height: 30,
+        backgroundColor: '#10263D',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 15,
         marginRight: 5
     },
-    headtext: {
-      color:'#FFF'
+    socialIconsWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 10,
+        paddingTop: 50,
+        paddingBottom: 50
     },
-    innerIcon: {
-      marginLeft: 35,
-      color: '#888'
+    socialIcon: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        backgroundColor: '#10263D',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 10
     },
-    share:{
-      height:50,
-      backgroundColor:'white',
-      padding:10,
-      flexDirection:'row',
-      alignItems:'center'
-    },
-    sharelinkIcon: {
-        marginLeft: 170
-    },
-    sharelinkText: {
-      marginLeft: 20,
-      color: '#888'
-    }
+
 });
