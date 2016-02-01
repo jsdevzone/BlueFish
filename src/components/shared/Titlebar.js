@@ -6,8 +6,10 @@
  */
  'use strict';
 
-import React, { Text, View, StyleSheet, } from 'react-native';
+import React, { Text, View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+improt { AppStore } from '../../stores/AppStore';
 
  /**
   * @class Titlebar
@@ -27,6 +29,10 @@ export class Titlebar extends React.Component {
         this.state = {};
     }
 
+    onMenuIconPress() {
+        AppStore.openDrawer();
+    }
+
     /**
      * @render
      * @return {View} container
@@ -34,7 +40,9 @@ export class Titlebar extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Icon name="ios-list-outline" size={25} color="#FFF" style={styles.icon}  />
+                <TouchableWithoutFeedback onPress={this.onMenuIconPress.bind(this)}>
+                    <Icon name="ios-list-outline" size={25} color="#FFF" style={styles.icon}  />
+                </TouchableWithoutFeedback>
                 <Text style={styles.title}> Menu</Text>
                 <View style={styles.titleFlex}/>
                 <View style={styles.rightWrapper}>

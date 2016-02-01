@@ -54,6 +54,12 @@ class BlueFish extends React.Component {
             */
             hasNetWorkConnection: false
          };
+
+         AppStore.on('draweropen', this.onDrawerOpen.bind(this))
+     }
+
+     onDrawerOpen() {
+         this.refs.drawer.openDrawer();
      }
 
      /**
@@ -78,7 +84,7 @@ class BlueFish extends React.Component {
          * render the application with the current navigator component
          */
         let screenView = (
-            <DrawerLayoutAndroid drawerWidth={300}
+            <DrawerLayoutAndroid ref="drawer" drawerWidth={300}
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
                 renderNavigationView={this.renderDrawerNavigationView.bind(this)}>
                     <View style={styles.container}>

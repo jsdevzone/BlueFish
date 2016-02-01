@@ -20,6 +20,8 @@ import { Titlebar } from '../shared/Titlebar';
 import { SlidingQueue } from '../player/SlidingQueue';
 import { SlidingPlayer } from '../player/SlidingPlayer';
 import { Categories } from './Categories';
+import { AuthorList } from './AuthorList';
+import { Topics } from './Topics';
 import { AppStore } from '../../stores/AppStore';
 
 const DEVICE_HEIGHT = Dimensions.get('window').height;
@@ -56,21 +58,17 @@ export class LandingPage extends React.Component {
                 <Image source={{uri: 'http://thumbs.dreamstime.com/t/fresh-green-grass-panorama-natural-blur-nature-background-light-sparkles-glitter-super-high-resolution-premium-quality-50458661.jpg'}} style={styles.landingCover}/>
                 <ScrollableTabView>
                     <ScrollView tabLabel="Music">
-                        <View style={{padding: 14,borderBottomWidth: 1, borderBottomColor:"#E1E1EE"}}>
-                            <Text>New Releases</Text>
-                        </View>
-                        <NewRelease />
-                        <View style={{padding: 14, borderTopWidth: 1, borderTopColor:'#E1E1E1',borderBottomWidth: 1, borderBottomColor:"#E1E1EE"}}>
-                            <Text>New Releases</Text>
-                        </View>
-                        <NewRelease />
                         <NewRelease />
                     </ScrollView>
                     <ScrollView tabLabel="Categories">
                         <Categories />
                     </ScrollView>
-                    <View tabLabel="Author" />
-                    <View tabLabel="Topics" />
+                    <ScrollView tabLabel="Authors">
+                        <AuthorList />
+                    </ScrollView>
+                    <ScrollView tabLabel="Topics">
+                        <Topics />
+                    </ScrollView>
                 </ScrollableTabView>
                 <SlidingUpPanel
                     containerMaximumHeight={MAX_HEIGHT}

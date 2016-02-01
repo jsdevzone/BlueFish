@@ -14,6 +14,9 @@ import Dimensions from 'Dimensions';
 //stores
 import { CategoryStore } from '../../stores/CategoryStore';
 import { AppStore } from '../../stores/AppStore';
+import { PropertyExtractor } from '../../core/PropertyExtractor';
+import { AppConfig } from '../../constants/AppConfig';
+import { Player } from './Player';
 
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 const DEVICE_WIDTH =  Dimensions.get('window').width;
@@ -37,20 +40,7 @@ export class SlidingQueue extends React.Component {
          * @state
          */
         this.state = {
-            dataSource: this.listDataSource.cloneWithRows([
-                /*{ title: 'Loveshhuda', cover: 'http://c.saavncdn.com/012/Loveshhuda-Hindi-2015-150x150.jpg', subTitle: 'Parichay,  Mithoon' },
-                { title: 'Sanam - Tere Bina Zindagi Se', cover: 'http://c.saavncdn.com/556/Sanam-Tere-Bina-Zindagi-Se-Hindi-2016-150x150.jpg', subTitle: 'Sanam Puri'},
-                { title: 'Sanam Re', cover: 'http://c.saavncdn.com/829/Sanam-Re-Hindi-2015-150x150.jpg', subTitle: 'Amaal Mallik' },
-                { title: 'Airlift', cover: 'http://c.saavncdn.com/451/Airlift-Hindi-2015-150x150.jpg', subTitle: 'Amaal Mallik'},
-                { title: 'Loveshhuda', cover: 'http://c.saavncdn.com/012/Loveshhuda-Hindi-2015-150x150.jpg', subTitle: 'Parichay,  Mithoon' },
-                { title: 'Sanam - Tere Bina Zindagi Se', cover: 'http://c.saavncdn.com/556/Sanam-Tere-Bina-Zindagi-Se-Hindi-2016-150x150.jpg', subTitle: 'Sanam Puri'},
-                { title: 'Sanam Re', cover: 'http://c.saavncdn.com/829/Sanam-Re-Hindi-2015-150x150.jpg', subTitle: 'Amaal Mallik' },
-                { title: 'Airlift', cover: 'http://c.saavncdn.com/451/Airlift-Hindi-2015-150x150.jpg', subTitle: 'Amaal Mallik'},
-                { title: 'Loveshhuda', cover: 'http://c.saavncdn.com/012/Loveshhuda-Hindi-2015-150x150.jpg', subTitle: 'Parichay,  Mithoon' },
-                { title: 'Sanam - Tere Bina Zindagi Se', cover: 'http://c.saavncdn.com/556/Sanam-Tere-Bina-Zindagi-Se-Hindi-2016-150x150.jpg', subTitle: 'Sanam Puri'},
-                { title: 'Sanam Re', cover: 'http://c.saavncdn.com/829/Sanam-Re-Hindi-2015-150x150.jpg', subTitle: 'Amaal Mallik' },
-                { title: 'Airlift', cover: 'http://c.saavncdn.com/451/Airlift-Hindi-2015-150x150.jpg', subTitle: 'Amaal Mallik'},*/
-            ]),
+            dataSource: this.listDataSource.cloneWithRows([]),
             currentPlayback: null,
             currentPlaybackId: 0
         };
@@ -62,31 +52,18 @@ export class SlidingQueue extends React.Component {
         });
     }
 
-    getPropsValue(obj, key) {
-        if(obj[key] && obj[key].length > 0)
-            return obj[key][0];
-        else
-            return null;
+    playQueue(playback) {
+        let playbackUrl = AppConfig.PLAYBACK_BASE_PATH + encodeURIComponent(PropertyExtractor(playback, 'filename'));
+        AppStore.startBuffering();
+        this.setState({ currentPlayback: playback, currentPlaybackId: this.getPropsValue(playback, 'id') });
+        NativeModules.MediaHelper.playMedia(this.playbackStarted.bind(this));
     }
 
-    /**
-     * Plays single item from the queue
-     *
-     * @param {Playbak} playback
-     * @return {Void} undefined
-     */
-    playQueue(playback) {
-        let url = "http://bhatkallys.com/wp-content/uploads/sermons/" + encodeURIComponent(this.getPropsValue(playback, 'filename'));
-        NativeModules.MediaHelper.playMedia(url, duration => {
-            this.setState({ currentPlayback: playback, currentPlaybackId: this.getPropsValue(playback, 'id') });
-            AppStore.startPlayback(playback);
-        });
+    playbackStarted(playback, duration) {
+        AppStore.startPlayback(playback);
     }
 
     onPopoutQueue(idx) {
-        let data = this.state.data;
-        //data.splice(idx, 1);
-        //this.setState({ data: data, dataSource: this.listDataSource.cloneWithRows(data)})
     }
 
     /**
@@ -97,40 +74,38 @@ export class SlidingQueue extends React.Component {
      * @param {Number} rowID
      */
     renderRow(rowData, sectionID: number, rowID: number) {
-        let coverImage = "http://bhatkallys.com/wp-content/uploads/sermons/images/" + this.getPropsValue(rowData, 'image');
         let playIcon = "ios-play";
-        if(this.state.currentPlayback != null && (this.state.currentPlaybackId == this.getPropsValue(rowData, 'id'))) {
+        let coverImage = AppConfig.IMAGE_BASE_PATH + PropertyExtractor.getProperty(rowData, 'image');
+        let playbackId = PropertyExtractor.getProperty(rowData, 'id');
+        let title = PropertyExtractor.getProperty(rowData,'audio_title');
+        let preacher = PropertyExtractor.getProperty(rowData, 'preacher_name');
+        let seprator = require('../../../resource/images/dashedline.png');
+
+        if(this.state.currentPlayback != null && this.state.currentPlaybackId == playbackId) {
             playIcon = 'ios-pause';
         }
-        let title = "   ";
-        let preacher = "   ";
 
-        if(rowData)
-        {
-            title = this.getPropsValue(rowData,'audio_title');
-            preacher =  this.getPropsValue(rowData, 'preacher_name');
-        }
         return (
             <View style={styles.row}>
                 <View style={styles.titleWrapper}>
                     <Image style={styles.cover} source={{uri: coverImage}}>
                         <TouchableWithoutFeedback onPress={() => { this.playQueue(rowData) }}>
-                            <View style={{width:30, height: 30, borderRadius: 15, borderColor:'#FFF', borderWidth: 2, alignItems: 'center', justifyContent: 'center'}}>
-                                <Icon name={playIcon} style={[styles.playerIcon]} size={25} color="#FFF" />
+                            <View style={this.playBtn}>
+                                <Icon name={playIcon} style={[styles.playerIcon]} size={23} color="#FFF" />
                             </View>
                         </TouchableWithoutFeedback>
                     </Image>
-                    <View style={{ flex: 1, justifyContent: 'center'}}>
-                        <Text style={{ fontSize: 14, color: '#fff'}}>{title}</Text>
-                        <Text style={{ color: '#E1E1E1'}}>{preacher}</Text>
+                    <View style={styles.queueItemWrapper}>
+                        <Text style={styles.queueItemTitle}>{title}</Text>
+                        <Text style={styles.queueItemPreacher}>{preacher}</Text>
                     </View>
                     <TouchableWithoutFeedback onPress={() => this.onPopoutQueue(rowID)}>
-                        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginRight: 20}}>
-                            <Icon name="trash-b" style={[styles.playerIcon]} size={25} color="#FFF" />
+                        <View style={styles.queueItemDeleteBtn}>
+                            <Icon name="trash-b" style={[styles.playerIcon]} size={23} color="#FFF" />
                         </View>
                     </TouchableWithoutFeedback>
                 </View>
-                <Image source={require('../../../resource/images/dashedline.png')} />
+                <Image source={seprator} />
             </View>
         );
     }
@@ -140,8 +115,9 @@ export class SlidingQueue extends React.Component {
      * @return {View} container
      */
     render() {
+        let backgroundImageUrl = 'http://wiki-fx.net/wp-content/uploads/2013/08/Black-Background-Collapsar-1080x1920.jpg';
         return (
-            <Image source={{uri:'http://wiki-fx.net/wp-content/uploads/2013/08/Black-Background-Collapsar-1080x1920.jpg'}} style={styles.container}>
+            <Image source={{uri:backgroundImageUrl}} style={styles.container}>
                 <ListView dataSource={this.state.dataSource}
                     renderRow={this.renderRow.bind(this)}
                     style={{flex: 1}} />
@@ -153,7 +129,7 @@ export class SlidingQueue extends React.Component {
 /**
  * @style
  */
- const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: DEVICE_WIDTH,
@@ -181,5 +157,31 @@ export class SlidingQueue extends React.Component {
     },
     playerIcon: {
         marginLeft: 8
+    },
+    playBtn: {
+        width:30,
+        height: 30,
+        borderRadius: 15,
+        borderColor:'#FFF',
+        borderWidth: 2,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    queueItemWrapper: {
+        flex: 1,
+        justifyContent: 'center'
+    },
+    queueItemTitle: {
+        fontSize: 14,
+        color: '#fff'
+    },
+    queueItemPreacher: {
+        color: '#E1E1E1'
+    },
+    queueItemDeleteBtn: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginRight: 20
     }
 });

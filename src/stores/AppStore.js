@@ -28,6 +28,7 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
     getSettings: function() {
 
     },
+
     /**
      * Start playback
      * @param {Playback} playback
@@ -35,5 +36,21 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
      */
     startPlayback: function(playback) {
         this.emit('playbackstarted', playback);
+    },
+
+    /**
+     * Start buffering new  playback
+     * @param {Playback} playback
+     * @return {Void} undefined
+     */
+    startBuffering: function(playback) {
+        this.emit('playbackstarted', playback);
+    },
+
+    /**
+     * @return {Void} undefined
+     */
+    openDrawer: function() {
+        this.emit('draweropen');
     }
 });

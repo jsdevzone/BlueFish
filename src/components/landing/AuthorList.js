@@ -14,7 +14,7 @@ import { PropertyExtractor } from '../../core/PropertyExtractor';
  * @class NewRelease
  * @extends React.Component
  */
-export class Categories extends React.Component {
+export class AuthroList extends React.Component {
 
     /**
      * @constructor
