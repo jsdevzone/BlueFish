@@ -15,6 +15,8 @@ import { NetworkInfo } from './src/components/shared/NetworkInfo';
 import { LandingPage } from './src/components/landing/LandingPage';
 import { DrawerNavigation } from './src/components/landing/DrawerNavigation';
 import { Album } from './src/components/album/Album';
+import { AppConfig } from './src/constants/AppConfig';
+import { AppStore } from './src/stores/AppStore';
 // Constant imports
 import { LocaleConfig, LocaleString } from './src/constants/LocaleConfig';
 
@@ -59,7 +61,7 @@ class BlueFish extends React.Component {
      }
 
      onDrawerOpen() {
-         this.refs.drawer.openDrawer();
+         this.drawer.openDrawer();
      }
 
      /**
@@ -84,7 +86,7 @@ class BlueFish extends React.Component {
          * render the application with the current navigator component
          */
         let screenView = (
-            <DrawerLayoutAndroid ref="drawer" drawerWidth={300}
+            <DrawerLayoutAndroid ref={(control) => this.drawer = control } drawerWidth={300}
                 drawerPosition={DrawerLayoutAndroid.positions.Left}
                 renderNavigationView={this.renderDrawerNavigationView.bind(this)}>
                     <View style={styles.container}>

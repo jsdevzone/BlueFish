@@ -9,7 +9,7 @@
 import React, { Text, View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-improt { AppStore } from '../../stores/AppStore';
+import { AppStore } from '../../stores/AppStore';
 
  /**
   * @class Titlebar

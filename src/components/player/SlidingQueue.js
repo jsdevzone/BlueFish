@@ -34,7 +34,9 @@ export class SlidingQueue extends React.Component {
         super();
 
         // ListView data source object
-        this.listDataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+        this.listDataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => {
+            return r1 !== r2;
+        }});
 
         /**
          * @state
@@ -42,7 +44,8 @@ export class SlidingQueue extends React.Component {
         this.state = {
             dataSource: this.listDataSource.cloneWithRows([]),
             currentPlayback: null,
-            currentPlaybackId: 0
+            currentPlaybackId: 0,
+            data: []
         };
     }
 
@@ -53,15 +56,22 @@ export class SlidingQueue extends React.Component {
     }
 
     playQueue(playback) {
-        let playbackUrl = AppConfig.PLAYBACK_BASE_PATH + encodeURIComponent(PropertyExtractor(playback, 'filename'));
-        AppStore.startBuffering();
-        this.setState({ currentPlayback: playback, currentPlaybackId: this.getPropsValue(playback, 'id') });
-        NativeModules.MediaHelper.playMedia(this.playbackStarted.bind(this));
+        let playbackUrl = AppConfig.PLAYBACK_BASE_PATH + encodeURIComponent(PropertyExtractor.getProperty(playback, 'filename'));
+        //AppStore.startBuffering();
+        this.state.data.map(item => {
+            if(PropertyExtractor.getProperty(playback, 'id') == PropertyExtractor.getProperty(item, 'id'))
+                item.isPlaying = true;
+            else
+                item.isPlaying = false;
+        });
+        this.setState({
+            currentPlayback: playback,
+            currentPlaybackId: PropertyExtractor.getProperty(playback, 'id'),
+            dataSource: this.listDataSource.cloneWithRows(this.state.data)
+        });
+        NativeModules.MediaHelper.playMedia(playbackUrl, duration => AppStore.startPlayback(playback));
     }
 
-    playbackStarted(playback, duration) {
-        AppStore.startPlayback(playback);
-    }
 
     onPopoutQueue(idx) {
     }
@@ -81,7 +91,7 @@ export class SlidingQueue extends React.Component {
         let preacher = PropertyExtractor.getProperty(rowData, 'preacher_name');
         let seprator = require('../../../resource/images/dashedline.png');
 
-        if(this.state.currentPlayback != null && this.state.currentPlaybackId == playbackId) {
+        if(rowData.isPlaying) {
             playIcon = 'ios-pause';
         }
 

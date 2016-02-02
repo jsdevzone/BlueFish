@@ -56,11 +56,11 @@ export class LandingPage extends React.Component {
             <View style={styles.container}>
             <Titlebar />
                 <Image source={{uri: 'http://thumbs.dreamstime.com/t/fresh-green-grass-panorama-natural-blur-nature-background-light-sparkles-glitter-super-high-resolution-premium-quality-50458661.jpg'}} style={styles.landingCover}/>
-                <ScrollableTabView>
+                <ScrollableTabView style={{flex:1}}>
                     <ScrollView tabLabel="Music">
                         <NewRelease />
                     </ScrollView>
-                    <ScrollView tabLabel="Categories">
+                    <ScrollView tabLabel="Categories" style={{flex:1}}>
                         <Categories />
                     </ScrollView>
                     <ScrollView tabLabel="Authors">

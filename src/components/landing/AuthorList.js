@@ -6,7 +6,7 @@
  */
 'use strict';
 
-import React, { Text, View, StyleSheet, ScrollView } from 'react-native';
+import React, { Text, View, StyleSheet, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { CoverTile } from '../shared/CoverTile';
 import { CategoryStore } from '../../stores/CategoryStore';
 import { PropertyExtractor } from '../../core/PropertyExtractor';
@@ -14,7 +14,7 @@ import { PropertyExtractor } from '../../core/PropertyExtractor';
  * @class NewRelease
  * @extends React.Component
  */
-export class AuthroList extends React.Component {
+export class AuthorList extends React.Component {
 
     /**
      * @constructor
@@ -31,7 +31,7 @@ export class AuthroList extends React.Component {
     }
 
     componentDidMount() {
-        CategoryStore.getCategories().then(json => this.categoryLoaded.bind(this));
+        CategoryStore.getCategories().then(this.categoryLoaded.bind(this));
     }
 
     categoryLoaded(json) {
@@ -46,10 +46,10 @@ export class AuthroList extends React.Component {
      * Render each cover in the state array
      * @return {Array<CoverTile>} covers
      */
-    renderCategories() {
+    renderAuthors() {
         return this.state.dataSource.map((item, index) => {
             return (
-                <TouchableWithoutFeedback onPress={() => this.onCategoryPress(item) }>
+                <TouchableWithoutFeedback key={index} onPress={() => this.onCategoryPress(item) }>
                     <View key={index} style={styles.categoryItem}>
                         <Text>{PropertyExtractor.getProperty(item, 'category_name')}</Text>
                     </View>
@@ -65,7 +65,7 @@ export class AuthroList extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                {this.renderCategories()}
+                {this.renderAuthors()}
             </View>
         );
     }

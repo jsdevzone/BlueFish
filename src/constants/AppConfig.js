@@ -15,7 +15,7 @@ export var AppConfig = {
      * Locate Storage Key for react native  async storage
      * @property {String} STORAGE_KEY
      */
-     STORAGE_KEY: '@BlueFish'
+     STORAGE_KEY: '@BlueFish',
      /**
       * Base path for images from the server
       * @property {String} imageBase

@@ -6,7 +6,7 @@
  */
 'use strict';
 
-import React, { Text, View, StyleSheet, ScrollView } from 'react-native';
+import React, { Text, View, StyleSheet, ScrollView, ToastAndroid, TouchableWithoutFeedback } from 'react-native';
 import { CoverTile } from '../shared/CoverTile';
 import { CategoryStore } from '../../stores/CategoryStore';
 import { PropertyExtractor } from '../../core/PropertyExtractor';
@@ -31,7 +31,7 @@ export class Categories extends React.Component {
     }
 
     componentDidMount() {
-        CategoryStore.getCategories().then(json => this.categoryLoaded.bind(this));
+        CategoryStore.getCategories().then(this.categoryLoaded.bind(this));
     }
 
     categoryLoaded(json) {
@@ -49,7 +49,7 @@ export class Categories extends React.Component {
     renderCategories() {
         return this.state.dataSource.map((item, index) => {
             return (
-                <TouchableWithoutFeedback onPress={() => this.onCategoryPress(item) }>
+                <TouchableWithoutFeedback key={index} onPress={() => this.onCategoryPress(item) }>
                     <View key={index} style={styles.categoryItem}>
                         <Text>{PropertyExtractor.getProperty(item, 'category_name')}</Text>
                     </View>
@@ -79,7 +79,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         padding: 5,
-        backgroundColor: '#FFF'
+        backgroundColor: '#fff',
+        flex: 1
     },
     titleWrapper: {
         marginLeft: 10,
