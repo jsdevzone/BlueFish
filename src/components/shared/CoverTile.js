@@ -6,7 +6,7 @@
  */
 'use strict';
 
-import React, { Text, View, StyleSheet, Image } from 'react-native';
+import React, { Text, View, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 /**
@@ -39,20 +39,15 @@ export class CoverTile extends React.Component {
     render() {
         let coverImage = "http://bhatkallys.com/wp-content/uploads/sermons/images/" + this.getPropsValue('image');
         return (
+            <TouchableWithoutFeedback onPress={this.props.onPress}>
             <View style={styles.container}>
                 <View style={styles.coverImageWrapper}>
-                    <Image source={{uri: coverImage}} style={styles.coverImage}>
-
-                    </Image>
+                    <Image source={{uri: coverImage}} style={styles.coverImage}></Image>
                 </View>
-                <View style={{flex: 1, flexDirection: 'column', marginLeft: 5}}>
-                    <Text style={styles.title}>{this.getPropsValue('audio_title')}</Text>
-                    <Text style={styles.subTitle}>{this.getPropsValue('preacher_name')}</Text>
-                </View>
-                <View style={{ paddingRight: 10, paddingLeft: 10}}>
-                    <Icon name="plus" color="#D8D8D8" size={20} />
-                </View>
+                <Text numberOfLines={1} style={styles.title}>{this.getPropsValue('audio_title')}</Text>
+                <Text style={styles.subTitle}>{this.getPropsValue('preacher_name')}</Text>
             </View>
+            </TouchableWithoutFeedback>
         );
     }
 }
@@ -62,31 +57,31 @@ export class CoverTile extends React.Component {
  */
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        alignItems: 'center',
         padding: 5,
-        borderBottomColor: '#ECECEC',
-        borderBottomWidth: 1
+        width: 110,
+        overflow: 'hidden'
     },
     coverImageWrapper: {
         padding: 5,
-        backgroundColor: '#F4F4F4',
-        borderColor: '#CCC',
-        width: 60,
-        height: 60,
+        width: 100,
+        height: 100,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        flexDirection:'column',
+        backgroundColor: '#FFF',
+        elevation: 5
     },
     coverImage: {
-        width: 50,
-        height: 50
+        width: 90,
+        height: 90
     },
     title: {
-        color: '#000',
         overflow: 'hidden',
-        marginTop: 5
+        marginTop: 3,
+        flexWrap: 'nowrap'
     },
     subTitle: {
-        color: '#a9a9a9'
+        color: '#a9a9a9',
+        fontSize: 12
     }
 });

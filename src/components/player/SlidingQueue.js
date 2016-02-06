@@ -17,6 +17,8 @@ import { AppStore } from '../../stores/AppStore';
 import { PropertyExtractor } from '../../core/PropertyExtractor';
 import { AppConfig } from '../../constants/AppConfig';
 import { Player } from './Player';
+import { Titlebar } from '../shared/Titlebar';
+import { SlidingPlayer } from './SlidingPlayer';
 
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 const DEVICE_WIDTH =  Dimensions.get('window').width;
@@ -51,6 +53,7 @@ export class SlidingQueue extends React.Component {
 
     componentDidMount() {
         CategoryStore.getLatestAlbums().then(json => {
+            AppStore.loadPlayback(json.Audios.Audio[0]);
             this.setState({ data: json.Audios.Audio, dataSource: this.listDataSource.cloneWithRows(json.Audios.Audio)});
         });
     }
@@ -111,11 +114,10 @@ export class SlidingQueue extends React.Component {
                     </View>
                     <TouchableWithoutFeedback onPress={() => this.onPopoutQueue(rowID)}>
                         <View style={styles.queueItemDeleteBtn}>
-                            <Icon name="trash-b" style={[styles.playerIcon]} size={23} color="#FFF" />
+                            <Icon name="trash-b" style={[styles.playerIcon]} size={23} color="#999" />
                         </View>
                     </TouchableWithoutFeedback>
                 </View>
-                <Image source={seprator} />
             </View>
         );
     }
@@ -127,11 +129,34 @@ export class SlidingQueue extends React.Component {
     render() {
         let backgroundImageUrl = 'http://wiki-fx.net/wp-content/uploads/2013/08/Black-Background-Collapsar-1080x1920.jpg';
         return (
-            <Image source={{uri:backgroundImageUrl}} style={styles.container}>
+            <View style={styles.container}>
+            <Titlebar title=" New Release" />
+            <SlidingPlayer />
                 <ListView dataSource={this.state.dataSource}
                     renderRow={this.renderRow.bind(this)}
                     style={{flex: 1}} />
-            </Image>
+                    <View style={{height:50, backgroundColor: '#FFF', borderTopWidth: 1, borderTopColor: '#ECECEC', flexDirection: 'row'}}>
+                        <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+                            <Icon name="home" size={23} color="#999" />
+                            <Text>Home</Text>
+                        </View>
+                        <View style={{width: 1, backgroundColor:'#CCC', marginTop: 10, marginBottom: 10}} />
+                        <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+                            <Icon name="music-note" size={23} color="#999" />
+                            <Text>Player</Text>
+                        </View>
+                        <View style={{width: 1, backgroundColor:'#CCC', marginTop: 10, marginBottom: 10}} />
+                        <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+                            <Icon name="search" size={23} color="#999" />
+                            <Text>Search</Text>
+                        </View>
+                        <View style={{width: 1, backgroundColor:'#CCC', marginTop: 10, marginBottom: 10}} />
+                        <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+                            <Icon name="ios-cog" size={23} color="#999" />
+                            <Text>Settings</Text>
+                        </View>
+                    </View>
+            </View>
         );
     }
 }
@@ -143,10 +168,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: DEVICE_WIDTH,
-        backgroundColor: '#3E3E3E',
-        flexDirection: 'column',
-        paddingLeft: 10,
-        paddingRight: 10
+        flexDirection: 'column'
     },
     row: {
         padding: 5,
@@ -172,7 +194,7 @@ const styles = StyleSheet.create({
         width:30,
         height: 30,
         borderRadius: 15,
-        borderColor:'#FFF',
+        borderColor:'#999',
         borderWidth: 2,
         alignItems: 'center',
         justifyContent: 'center'
@@ -183,10 +205,10 @@ const styles = StyleSheet.create({
     },
     queueItemTitle: {
         fontSize: 14,
-        color: '#fff'
+        color: '#999'
     },
     queueItemPreacher: {
-        color: '#E1E1E1'
+        color: '#ccc'
     },
     queueItemDeleteBtn: {
         flexDirection: 'row',

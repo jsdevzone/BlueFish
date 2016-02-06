@@ -6,7 +6,7 @@
  */
 'use strict';
 
-import React, { Text, View, StyleSheet, Image, ScrollView, } from 'react-native';
+import React, { Text, View, StyleSheet, Image, ScrollView, TouchableWithoutFeedback,  } from 'react-native';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import SlidingUpPanel from '../ux/SlidingPanel';
 import Dimensions from 'Dimensions';
@@ -47,6 +47,15 @@ export class LandingPage extends React.Component {
         this.state = {};
     }
 
+    onAuthor() {
+        this.props.navigator.push({ title: 'Authors', component: AuthorList, props: { navigator: this.props.navigator }});
+    }
+
+
+    onCategoryPress() {
+        this.props.navigator.push({ title: 'Categories', component: Categories, props: { navigator: this.props.navigator }});
+    }
+
     /**
      * @render
      * @return {Comoponent} container
@@ -54,29 +63,70 @@ export class LandingPage extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-            <Titlebar />
-                <Image source={{uri: 'http://thumbs.dreamstime.com/t/fresh-green-grass-panorama-natural-blur-nature-background-light-sparkles-glitter-super-high-resolution-premium-quality-50458661.jpg'}} style={styles.landingCover}/>
-                <ScrollableTabView style={{flex:1}}>
-                    <ScrollView tabLabel="Music">
-                        <NewRelease />
-                    </ScrollView>
-                    <ScrollView tabLabel="Categories" style={{flex:1}}>
-                        <Categories />
-                    </ScrollView>
-                    <ScrollView tabLabel="Authors">
-                        <AuthorList />
-                    </ScrollView>
-                    <ScrollView tabLabel="Topics">
-                        <Topics />
-                    </ScrollView>
-                </ScrollableTabView>
-                <SlidingUpPanel
-                    containerMaximumHeight={MAX_HEIGHT}
-                    containerBackgroundColor={'green'}
-                    handlerHeight={MIN_HEIGHT}
-                    handlerDefaultView={<SlidingPlayer/>}>
-                        <SlidingQueue />
-                </SlidingUpPanel>
+                <Titlebar />
+                <ScrollView tabLabel="Music">
+                    <NewRelease {...this.props} />
+                    <View style={{height: 1, backgroundColor: '#CCC', marginLeft: 10, marginRight: 10, marginTop: 20, marginBottom: 20}}/>
+                    <View style={styles.titleWrapper}>
+                        <Text style={styles.title}>Categories</Text>
+                    </View>
+                    <View style={{flexDirection:'row', flexWrap:'wrap', alignItems: 'center', justifyContent:'center'}}>
+                        <TouchableWithoutFeedback onPress={this.onAuthor.bind(this)}>
+                        <Image source={require('../../../resource/images/imagenew.jpg')} style={styles.imageCover}>
+                            <Text style={styles.imageText}>AUTHORS</Text>
+                        </Image>
+                        </TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback onPress={this.onCategoryPress.bind(this)}>
+                        <Image source={require('../../../resource/images/imagenew.jpg')} style={styles.imageCover}>
+                            <Text style={styles.imageText}>CATEGORY</Text>
+                        </Image>
+                        </TouchableWithoutFeedback>
+                        <Image source={require('../../../resource/images/imagenew.jpg')} style={styles.imageCover}>
+                            <Text style={styles.imageText}>FAVOURITES</Text>
+                        </Image>
+                        <Image source={require('../../../resource/images/imagenew.jpg')} style={styles.imageCover}>
+                            <Text style={styles.imageText}>VIDEOS</Text>
+                        </Image>
+                    </View>
+                    <View style={styles.socialIconsWrapper}>
+                        <View style={styles.socialIcon}>
+                            <Icon name="social-facebook" size={18} color="#FFF" />
+                        </View>
+                        <View style={styles.socialIcon}>
+                            <Icon name="social-twitter" size={18} color="#FFF" />
+                        </View>
+                        <View style={styles.socialIcon}>
+                            <Icon name="social-instagram" size={18} color="#FFF" />
+                        </View>
+                        <View style={styles.socialIcon}>
+                            <Icon name="social-google" size={18} color="#FFF" />
+                        </View>
+                    </View>
+                </ScrollView>
+                <View style={{height: 65, backgroundColor: '#F4F4F4', borderTopWidth: 1, borderTopColor: '#E2E2E2', justifyContent: 'center', alignItems: 'center'}}>
+                    <Text> Advertisement</Text>
+                </View>
+                <View style={{height:50, backgroundColor: '#FFF', borderTopWidth: 1, borderTopColor: '#ECECEC', flexDirection: 'row'}}>
+                    <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+                        <Icon name="home" size={23} color="#999" />
+                        <Text>Home</Text>
+                    </View>
+                    <View style={{width: 1, backgroundColor:'#CCC', marginTop: 10, marginBottom: 10}} />
+                    <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+                        <Icon name="music-note" size={23} color="#999" />
+                        <Text>Player</Text>
+                    </View>
+                    <View style={{width: 1, backgroundColor:'#CCC', marginTop: 10, marginBottom: 10}} />
+                    <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+                        <Icon name="search" size={23} color="#999" />
+                        <Text>Search</Text>
+                    </View>
+                    <View style={{width: 1, backgroundColor:'#CCC', marginTop: 10, marginBottom: 10}} />
+                    <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+                        <Icon name="ios-cog" size={23} color="#999" />
+                        <Text>Settings</Text>
+                    </View>
+                </View>
             </View>
         );
     }
@@ -89,7 +139,7 @@ const styles = StyleSheet.create({
          flex: 1,
          padding: 0,
          flexDirection: 'column',
-         backgroundColor: '#FFF'
+         backgroundColor: '#F4F4F4'
      },
      landingCover: {
          width: null,
@@ -109,6 +159,41 @@ const styles = StyleSheet.create({
      tabText: {
          fontSize: 20,
          color: '#999'
-     }
-
+     },
+     imageCover: {
+         margin:10,
+         width: 150,
+         height: 150,
+         alignItems:'center',
+         justifyContent:'center',
+         backgroundColor: '#30B55A'
+     },
+     imageText: {
+         color: '#FFF',
+         fontSize:18,
+         fontWeight:'bold'
+    },
+    socialIconsWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 10,
+        paddingTop: 50,
+        paddingBottom: 50
+    },
+    socialIcon: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        backgroundColor: '#30B55A',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 10
+    },
+    titleWrapper: {
+        marginLeft: 20,
+    },
+    title: {
+        color: '#999'
+    }
 });

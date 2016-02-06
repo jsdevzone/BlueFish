@@ -9,6 +9,7 @@
 import React, { Text, View, StyleSheet, ScrollView } from 'react-native';
 import { CoverTile } from '../shared/CoverTile';
 import { CategoryStore } from '../../stores/CategoryStore';
+import { SlidingQueue } from '../player/SlidingQueue';
 /**
  * @class NewRelease
  * @extends React.Component
@@ -35,13 +36,17 @@ export class NewRelease extends React.Component {
         });
     }
 
+    onTilePress() {
+        this.props.navigator.push({ title: 'New Release', component: SlidingQueue, props: { navigator: this.props.navigator }});
+    }
+
     /**
      * Render each cover in the state array
      * @return {Array<CoverTile>} covers
      */
     renderCovers() {
         return this.state.dataSource.map((item, index) => {
-            return <CoverTile key={index} cover={item} />
+            return <CoverTile key={index} cover={item} onPress={this.onTilePress.bind(this)} />
         });
     }
 
@@ -52,7 +57,10 @@ export class NewRelease extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <ScrollView  showsHorizontalScrollIndicator={false} style={styles.container} horizontal={false}>
+                <View style={styles.titleWrapper}>
+                    <Text style={styles.title}>New Releases</Text>
+                </View>
+                <ScrollView  showsHorizontalScrollIndicator={true} style={styles.container} horizontal={true}>
                     {this.renderCovers()}
                 </ScrollView>
             </View>
@@ -65,9 +73,7 @@ export class NewRelease extends React.Component {
  */
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'column',
-        padding: 5,
-        backgroundColor: '#FFF'
+        padding: 5
     },
     titleWrapper: {
         marginLeft: 10,

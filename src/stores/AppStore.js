@@ -38,6 +38,10 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
         this.emit('playbackstarted', playback);
     },
 
+    loadPlayback: function(playback) {
+        this.emit('playbackloaded', playback);
+    },
+
     /**
      * Start buffering new  playback
      * @param {Playback} playback

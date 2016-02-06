@@ -40,10 +40,7 @@ export class Titlebar extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <TouchableWithoutFeedback onPress={this.onMenuIconPress.bind(this)}>
-                    <Icon name="ios-list-outline" size={25} color="#FFF" style={styles.icon}  />
-                </TouchableWithoutFeedback>
-                <Text style={styles.title}> Menu</Text>
+                <Text style={styles.title}>{this.props.title || "Menu"}</Text>
                 <View style={styles.titleFlex}/>
                 <View style={styles.rightWrapper}>
                     <Icon name="search" size={25} color="#FFF" style={styles.icon}  />
@@ -58,12 +55,12 @@ export class Titlebar extends React.Component {
  */
 const styles = StyleSheet.create({
     container: {
-        height: 65,
+        height: 55,
         flexDirection: 'row',
         padding: 5,
         paddingLeft: 10,
         paddingRight: 10,
-        backgroundColor: '#14324A',
+        backgroundColor: '#30B55A',
         alignItems: 'center'
     },
     icon: {

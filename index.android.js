@@ -6,22 +6,44 @@
  */
  'use strict';
 
-import React, { Text, View, StyleSheet, AppRegistry, Navigator, DrawerLayoutAndroid, } from 'react-native';
+import React, { Text, View, StyleSheet, AppRegistry, Navigator, DrawerLayoutAndroid, BackAndroid } from 'react-native';
 /**
  * Custom application components
  */
 import { Titlebar } from './src/components/shared/Titlebar';
 import { NetworkInfo } from './src/components/shared/NetworkInfo';
 import { LandingPage } from './src/components/landing/LandingPage';
+import { Categories } from './src/components/landing/Categories';
+import { AuthorList } from './src/components/landing/AuthorList';
 import { DrawerNavigation } from './src/components/landing/DrawerNavigation';
 import { Album } from './src/components/album/Album';
 import { AppConfig } from './src/constants/AppConfig';
 import { AppStore } from './src/stores/AppStore';
+import { Detail } from './src/components/shared/Detail';
 // Constant imports
 import { LocaleConfig, LocaleString } from './src/constants/LocaleConfig';
 
 var _initialRoute = null;
 var _navigator = null;
+
+
+/**
+ * Attach event listener to android back button press.
+ * If navigator stack length is greater than one it pops out
+ * the last  route from the stack. If it's the dashboard then exit
+ * the application to the android home screen.
+ * Refer navigator component of react native for more details.
+ *
+ * https://facebook.github.io/react-native/docs/navigator.html
+ */
+BackAndroid.addEventListener('hardwareBackPress', () => {
+    if (_navigator.getCurrentRoutes().length === 1  ) {
+        return false;
+    }
+    _navigator.pop();
+    return true;
+});
+
 
  /**
   * @class BlueFish

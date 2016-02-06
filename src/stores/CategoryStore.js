@@ -50,12 +50,24 @@ export var CategoryStore = Object.assign({}, EventEmitter.prototype, {
         return promise;
     },
 
-    getTopics() {
+    getTopics: function() {
         let params = {
             lang: 'en',
             stcnt: 0,
             encnt: 500,
             listtype: 'series',
+            subfilter: ''
+        };
+        let promise = RequestManager.get(params);
+        return promise;
+    },
+
+    getAuthors: function() {
+        let params = {
+            lang: 'en',
+            stcnt: 0,
+            encnt: 5000,
+            listtype: 'author',
             subfilter: ''
         };
         let promise = RequestManager.get(params);
