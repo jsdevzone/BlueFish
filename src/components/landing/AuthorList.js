@@ -103,7 +103,7 @@ export class AuthorList extends React.Component {
             <View style={styles.container}>
             <Titlebar/>
             <View style={{backgroundColor:'#FFF', flexDirection: 'row', alignItems: 'center'}}>
-<Icon name="search" size={25} color="#999" style={{marginLeft:10, marginRight: 10}} />
+            <Icon name="search" size={25} color="#999" style={{marginLeft:10, marginRight: 10}} />
             <TextInput underlineColorAndroid="#FFF" style={{flex:1}} placeholder="Search Authors" />
             </View>
             <ListView style={{flex:1}}

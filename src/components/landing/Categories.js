@@ -6,7 +6,7 @@
  */
 'use strict';
 
-import React, { Text, View, StyleSheet, ScrollView, ListView, TouchableWithoutFeedback } from 'react-native';
+import React, { Text, View, StyleSheet, ScrollView, ListView, TouchableWithoutFeedback,Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { CoverTile } from '../shared/CoverTile';
 import { CategoryStore } from '../../stores/CategoryStore';
@@ -69,26 +69,24 @@ export class Categories extends React.Component {
     renderRow(rowData) {
         let component = (
             <View>
-                <View style={{padding: 5, backgroundColor: '#FFF', borderBottomWidth: 1, borderBottomColor: '#E2E2E2', borderTopColor: '#E2E2E2', borderTopWidth: 1}}>
-                    <Text>{rowData}</Text>
-                </View>
-                <View style={{padding: 10, backgroundColor: '#F4F4F4', flexDirection: 'row', flexWrap: 'wrap'}}>
+
+                <Image source={require('../../../resource/images/Shelf.png')} style={{height:100,padding: 10,elevation:5, backgroundColor: '#F4F4F4', flexDirection: 'row', flexWrap: 'wrap'}}>
                 {(()=>{
                     let arr = [];
                     if(this.authors[rowData]) {
                         this.authors[rowData].map((author, index) => {
                             arr.push(
                                 <TouchableWithoutFeedback onPress={this.onCategoryPress.bind(this)}>
-                                <View key={index} style={{ padding: 15, backgroundColor:'#FFF', elevation: 5, margin: 5, alignItems: 'center', justifyContent: 'center'}}>
-                                    <Text style={{textAlign:'center'}}>{PropertyExtractor.getProperty(author, 'category_name')}</Text>
-                                </View>
+                                <Image source={require('../../../resource/images/dvd.jpg')} key={index} style={{ width:120,height:80, padding: 15, backgroundColor:'#FFF', elevation: 8, marginLeft: 5, alignItems: 'center', justifyContent: 'center'}}>
+                                    <Text style={{textAlign:'center',marginRight:30,color:'#FFF'}}>{PropertyExtractor.getProperty(author, 'category_name')}</Text>
+                                </Image>
                                 </TouchableWithoutFeedback>
                             );
                         });
                     }
                     return arr;
                 })()}
-                </View>
+                </Image>
             </View>
         )
         return component;

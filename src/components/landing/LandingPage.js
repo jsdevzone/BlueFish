@@ -62,7 +62,7 @@ export class LandingPage extends React.Component {
      */
     render() {
         return (
-            <View style={styles.container}>
+            <Image style={styles.container} source={require('../../../resource/images/na1.jpg')}>
                 <Titlebar />
                 <ScrollView tabLabel="Music">
                     <NewRelease {...this.props} />
@@ -103,8 +103,8 @@ export class LandingPage extends React.Component {
                         </View>
                     </View>
                 </ScrollView>
-                <View style={{height: 65, backgroundColor: '#F4F4F4', borderTopWidth: 1, borderTopColor: '#E2E2E2', justifyContent: 'center', alignItems: 'center'}}>
-                    <Text> Advertisement</Text>
+                <View style={{height: 50, backgroundColor: '#F4F4F4', borderTopWidth: 1, borderTopColor: '#E2E2E2', justifyContent: 'center', alignItems: 'center'}}>
+                    <Image source={{uri:'https://mruiz223.files.wordpress.com/2013/01/adidashistory1.jpg'}} style={styles.advetisement}/>
                 </View>
                 <View style={{height:50, backgroundColor: '#FFF', borderTopWidth: 1, borderTopColor: '#ECECEC', flexDirection: 'row'}}>
                     <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
@@ -127,7 +127,7 @@ export class LandingPage extends React.Component {
                         <Text>Settings</Text>
                     </View>
                 </View>
-            </View>
+            </Image>
         );
     }
 }
@@ -137,6 +137,7 @@ export class LandingPage extends React.Component {
 const styles = StyleSheet.create({
      container: {
          flex: 1,
+         width:null,
          padding: 0,
          flexDirection: 'column',
          backgroundColor: '#F4F4F4'
@@ -195,5 +196,10 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#999'
+    },
+    advetisement:{
+        width: 370,
+        height: 50,
+        backgroundColor: '#30B55A'
     }
 });

@@ -65,11 +65,13 @@ import { PropertyExtractor } from '../../core/PropertyExtractor';
          alignItems: 'center',
          flexDirection:'column',
          backgroundColor: '#FFF',
+         borderRadius:50,
          elevation: 5
      },
      coverImage: {
-         width: 90,
-         height: 90
+         width: 100,
+         height: 100,
+         borderRadius:50
      },
      title: {
          overflow: 'hidden',

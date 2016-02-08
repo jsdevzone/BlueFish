@@ -41,6 +41,7 @@ export class Titlebar extends React.Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>{this.props.title || "Menu"}</Text>
+                <Text style={styles.titleHead}>URDU AUDIO</Text>
                 <View style={styles.titleFlex}/>
                 <View style={styles.rightWrapper}>
                     <Icon name="search" size={25} color="#FFF" style={styles.icon}  />
@@ -72,7 +73,17 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontSize: 20,
         marginTop: 2,
+        alignItems:'center',
         fontFamily: 'Tahoma'
+    },
+    titleHead: {
+        color: '#FFF',
+        fontSize: 20,
+        marginTop: 2,
+        marginLeft:65,
+        alignItems:'center',
+        fontFamily: 'Tahoma',
+        fontWeight:'bold'
     },
     titleFlex: {
         flex: 1
