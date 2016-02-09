@@ -141,7 +141,7 @@ export class AuthorList extends React.Component {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'stretch',
-        backgroundColor: '#E1E1E1',
+        backgroundColor: '#000',
         flex: 1
     },
     titleWrapper: {

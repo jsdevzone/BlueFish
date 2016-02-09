@@ -70,14 +70,14 @@ export class Categories extends React.Component {
         let component = (
             <View>
 
-                <Image source={require('../../../resource/images/Shelf.png')} style={{height:100,padding: 10,elevation:5, backgroundColor: '#F4F4F4', flexDirection: 'row', flexWrap: 'wrap'}}>
+                <Image source={require('../../../resource/images/shelf5.jpg')} style={{width:null,height:100,padding: 10,elevation:5, backgroundColor: '#F4F4F4', flexDirection: 'row', flexWrap: 'wrap'}}>
                 {(()=>{
                     let arr = [];
                     if(this.authors[rowData]) {
                         this.authors[rowData].map((author, index) => {
                             arr.push(
                                 <TouchableWithoutFeedback onPress={this.onCategoryPress.bind(this)}>
-                                <Image source={require('../../../resource/images/dvd.jpg')} key={index} style={{ width:120,height:80, padding: 15, backgroundColor:'#FFF', elevation: 8, marginLeft: 5, alignItems: 'center', justifyContent: 'center'}}>
+                                <Image source={require('../../../resource/images/coverAlbum.png')} key={index} style={{ width:120,height:77, padding: 15, backgroundColor:'#FFF', elevation: 5, marginLeft: 5, alignItems: 'center', justifyContent: 'center'}}>
                                     <Text style={{textAlign:'center',marginRight:30,color:'#FFF'}}>{PropertyExtractor.getProperty(author, 'category_name')}</Text>
                                 </Image>
                                 </TouchableWithoutFeedback>

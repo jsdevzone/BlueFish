@@ -57,9 +57,7 @@ export class NewRelease extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.titleWrapper}>
-                    <Text style={styles.title}>New Releases</Text>
-                </View>
+                
                 <ScrollView  showsHorizontalScrollIndicator={true} style={styles.container} horizontal={true}>
                     {this.renderCovers()}
                 </ScrollView>

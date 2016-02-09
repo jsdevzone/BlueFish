@@ -65,6 +65,9 @@ export class LandingPage extends React.Component {
             <Image style={styles.container} source={require('../../../resource/images/na1.jpg')}>
                 <Titlebar />
                 <ScrollView tabLabel="Music">
+                    <View style={{marginLeft:18, marginTop:8}}>
+                        <Text style={styles.title}>New Releases</Text>
+                    </View>
                     <NewRelease {...this.props} />
                     <View style={{height: 1, backgroundColor: '#CCC', marginLeft: 10, marginRight: 10, marginTop: 20, marginBottom: 20}}/>
                     <View style={styles.titleWrapper}>
@@ -88,6 +91,11 @@ export class LandingPage extends React.Component {
                             <Text style={styles.imageText}>VIDEOS</Text>
                         </Image>
                     </View>
+                    <View style={{borderBottomWidth:1, marginTop:15,marginLeft:7,marginRight:7,borderBottomColor:'#999999'}}></View>
+                    <View style={{marginLeft:18, marginTop:8}}>
+                        <Text style={styles.title}>Surprises</Text>
+                    </View>
+                    <NewRelease {...this.props} />
                     <View style={styles.socialIconsWrapper}>
                         <View style={styles.socialIcon}>
                             <Icon name="social-facebook" size={18} color="#FFF" />
@@ -195,7 +203,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
     },
     title: {
-        color: '#999'
+        color: '#666666'
     },
     advetisement:{
         width: 370,
