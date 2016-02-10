@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden'
     },
     coverImageWrapper: {
-        padding: 5,
+        padding: 2,
         width: 100,
         height: 100,
         justifyContent: 'center',

@@ -68,11 +68,11 @@ export class AuthorList extends React.Component {
      */
     renderRow(rowData) {
         let component = (
-            <View>
-                <View style={{padding: 5, backgroundColor: '#FFF', borderBottomWidth: 1, borderBottomColor: '#E2E2E2', borderTopColor: '#E2E2E2', borderTopWidth: 1}}>
+            <View style={styles.rowContainer}>
+                <View style={styles.rowHeader}>
                     <Text>{rowData}</Text>
                 </View>
-                <View style={{padding: 10, backgroundColor: '#F4F4F4', flexDirection: 'row', flexWrap: 'wrap'}}>
+                <View style={{alignItems: 'center', justifyContent: 'center', padding: 10, flexDirection: 'row', flexWrap: 'wrap', backgroundColor: 'rgba(255, 255, 255, 0.3)'}}>
                     {(()=>{
                         let arr = [];
                         if(this.authors[rowData]) {
@@ -102,13 +102,19 @@ export class AuthorList extends React.Component {
         return (
             <View style={styles.container}>
             <Titlebar/>
-            <View style={{backgroundColor:'#FFF', flexDirection: 'row', alignItems: 'center'}}>
+
+
+            <Image style={{flex: 1}} source={{uri:'http://www.webdesigndev.com/wp-content/uploads/2014/09/5-Blurred-Backgrounds-Vol.1.jpg'}}>
+            <View style={styles.dummy}>
             <Icon name="search" size={25} color="#999" style={{marginLeft:10, marginRight: 10}} />
-            <TextInput underlineColorAndroid="#FFF" style={{flex:1}} placeholder="Search Authors" />
+            <TextInput underlineColorAndroid="rgba(255, 255, 255, 0.3)" style={{flex:1}} placeholder="Search Authors" />
             </View>
             <ListView style={{flex:1}}
                 dataSource={this.state.dataSource}
                 renderRow={this.renderRow.bind(this)} />
+            </Image>
+
+
                 <View style={{height:50, backgroundColor: '#FFF', borderTopWidth: 1, borderTopColor: '#ECECEC', flexDirection: 'row'}}>
                     <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
                         <Icon name="home" size={23} color="#999" />
@@ -141,7 +147,6 @@ export class AuthorList extends React.Component {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'stretch',
-        backgroundColor: '#000',
         flex: 1
     },
     titleWrapper: {
@@ -158,5 +163,21 @@ const styles = StyleSheet.create({
         padding: 10,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    rowContainer: {
+        backgroundColor: 'rgba(255, 255, 255, 0.3)',
+        margin: 5
+    },
+    rowHeader: {
+        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+        padding: 5,
+        borderBottomWidth: 1,
+        borderBottomColor: '#F4F4F4',
+        borderTopColor: '#F4F4F4',
+        borderTopWidth: 1
+    },
+    dummy: {
+backgroundColor:'rgba(255, 255, 255, 0.3)',
+margin: 5, flexDirection: 'row', alignItems: 'center'
     }
 });

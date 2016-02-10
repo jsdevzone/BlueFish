@@ -41,7 +41,7 @@ import { PropertyExtractor } from '../../core/PropertyExtractor';
                  <View style={styles.coverImageWrapper}>
                      <Image source={{uri: coverImage}} style={styles.coverImage}></Image>
                  </View>
-                 <Text numberOfLines={1} style={styles.title}>{PropertyExtractor.getProperty(this.props.author, 'preacher_title')}</Text>
+                 <Text numberOfLines={2} style={styles.title}>{PropertyExtractor.getProperty(this.props.author, 'preacher_title')}</Text>
              </View>
          );
      }
@@ -55,28 +55,30 @@ import { PropertyExtractor } from '../../core/PropertyExtractor';
      container: {
          padding: 5,
          width: 110,
-         overflow: 'hidden'
+         overflow: 'hidden',
+         alignItems: 'center'
      },
      coverImageWrapper: {
          padding: 5,
-         width: 100,
-         height: 100,
+         width: 70,
+         height: 70,
          justifyContent: 'center',
          alignItems: 'center',
          flexDirection:'column',
          backgroundColor: '#FFF',
-         borderRadius:50,
+         borderRadius:35,
          elevation: 5
      },
      coverImage: {
-         width: 100,
-         height: 100,
-         borderRadius:50
+         width: 60,
+         height: 60,
+         borderRadius:30
      },
      title: {
          overflow: 'hidden',
          marginTop: 3,
-         flexWrap: 'nowrap'
+         flexWrap: 'nowrap',
+         textAlign: 'center'
      },
      subTitle: {
          color: '#a9a9a9',

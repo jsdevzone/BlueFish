@@ -6,7 +6,7 @@
  */
 'use strict';
 
-import React, { Text, View, StyleSheet, ScrollView } from 'react-native';
+import React, { Text, View, StyleSheet, ScrollView, ToastAndroid, } from 'react-native';
 import { CoverTile } from '../shared/CoverTile';
 import { CategoryStore } from '../../stores/CategoryStore';
 import { SlidingQueue } from '../player/SlidingQueue';
@@ -57,8 +57,10 @@ export class NewRelease extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                
-                <ScrollView  showsHorizontalScrollIndicator={true} style={styles.container} horizontal={true}>
+                <View style={styles.titleWrapper}>
+                    <Text style={styles.title}>New Releases</Text>
+                </View>
+                <ScrollView  showsHorizontalScrollIndicator={true} horizontal={true}>
                     {this.renderCovers()}
                 </ScrollView>
             </View>
@@ -71,10 +73,12 @@ export class NewRelease extends React.Component {
  */
 const styles = StyleSheet.create({
     container: {
-        padding: 5
+        margin: 5,
+        padding: 5,
+        backgroundColor: 'rgba(255, 255, 255, 0.2)'
     },
     titleWrapper: {
-        marginLeft: 10,
+        marginLeft: 5,
     },
     title: {
         color: '#999'

@@ -62,18 +62,11 @@ export class LandingPage extends React.Component {
      */
     render() {
         return (
-            <Image style={styles.container} source={require('../../../resource/images/na1.jpg')}>
+            <Image style={styles.container} source={{uri:'http://www.webdesigndev.com/wp-content/uploads/2014/09/5-Blurred-Backgrounds-Vol.1.jpg'}}>
                 <Titlebar />
                 <ScrollView tabLabel="Music">
-                    <View style={{marginLeft:18, marginTop:8}}>
-                        <Text style={styles.title}>New Releases</Text>
-                    </View>
                     <NewRelease {...this.props} />
-                    <View style={{height: 1, backgroundColor: '#CCC', marginLeft: 10, marginRight: 10, marginTop: 20, marginBottom: 20}}/>
-                    <View style={styles.titleWrapper}>
-                        <Text style={styles.title}>Categories</Text>
-                    </View>
-                    <View style={{flexDirection:'row', flexWrap:'wrap', alignItems: 'center', justifyContent:'center'}}>
+                    <View style={{flexDirection:'row', flexWrap:'wrap', alignItems: 'center', justifyContent:'center', marginTop: 6}}>
                         <TouchableWithoutFeedback onPress={this.onAuthor.bind(this)}>
                         <Image source={require('../../../resource/images/imagenew.jpg')} style={styles.imageCover}>
                             <Text style={styles.imageText}>AUTHORS</Text>
@@ -90,10 +83,6 @@ export class LandingPage extends React.Component {
                         <Image source={require('../../../resource/images/imagenew.jpg')} style={styles.imageCover}>
                             <Text style={styles.imageText}>VIDEOS</Text>
                         </Image>
-                    </View>
-                    <View style={{borderBottomWidth:1, marginTop:15,marginLeft:7,marginRight:7,borderBottomColor:'#999999'}}></View>
-                    <View style={{marginLeft:18, marginTop:8}}>
-                        <Text style={styles.title}>Surprises</Text>
                     </View>
                     <NewRelease {...this.props} />
                     <View style={styles.socialIconsWrapper}>
@@ -112,7 +101,7 @@ export class LandingPage extends React.Component {
                     </View>
                 </ScrollView>
                 <View style={{height: 50, backgroundColor: '#F4F4F4', borderTopWidth: 1, borderTopColor: '#E2E2E2', justifyContent: 'center', alignItems: 'center'}}>
-                    <Image source={{uri:'https://mruiz223.files.wordpress.com/2013/01/adidashistory1.jpg'}} style={styles.advetisement}/>
+                    <Image source={{uri:'http://www.internationalfilmindustry.com/images/advertise-banner.jpg'}} style={styles.advetisement}/>
                 </View>
                 <View style={{height:50, backgroundColor: '#FFF', borderTopWidth: 1, borderTopColor: '#ECECEC', flexDirection: 'row'}}>
                     <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
@@ -171,8 +160,8 @@ const styles = StyleSheet.create({
      },
      imageCover: {
          margin:10,
-         width: 150,
-         height: 150,
+         width: 130,
+         height: 130,
          alignItems:'center',
          justifyContent:'center',
          backgroundColor: '#30B55A'
@@ -186,9 +175,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+        marginTop: 5,
+        marginBottom: 10,
+        marginLeft: 5,
+        marginRight: 5,
         padding: 10,
-        paddingTop: 50,
-        paddingBottom: 50
+        backgroundColor: 'rgba(255, 255, 255, 0.3)'
     },
     socialIcon: {
         width: 40,
@@ -203,7 +195,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
     },
     title: {
-        color: '#666666'
+        color: '#999'
     },
     advetisement:{
         width: 370,

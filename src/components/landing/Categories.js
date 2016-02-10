@@ -70,7 +70,7 @@ export class Categories extends React.Component {
         let component = (
             <View>
 
-                <Image source={require('../../../resource/images/shelf5.jpg')} style={{width:null,height:100,padding: 10,elevation:5, backgroundColor: '#F4F4F4', flexDirection: 'row', flexWrap: 'wrap'}}>
+                <Image source={require('../../../resource/images/shelf4.png')} style={{width:null,height:100,padding: 10,elevation:5, backgroundColor: '#F4F4F4', flexDirection: 'row', flexWrap: 'wrap'}}>
                 {(()=>{
                     let arr = [];
                     if(this.authors[rowData]) {
@@ -91,7 +91,6 @@ export class Categories extends React.Component {
         )
         return component;
     }
-
     /**
      * @render
      * @return {View} container
