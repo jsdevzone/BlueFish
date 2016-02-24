@@ -70,15 +70,16 @@ import { PropertyExtractor } from '../../core/PropertyExtractor';
          elevation: 5
      },
      coverImage: {
-         width: 60,
-         height: 60,
+         width: 65,
+         height: 65,
          borderRadius:30
      },
      title: {
          overflow: 'hidden',
          marginTop: 3,
          flexWrap: 'nowrap',
-         textAlign: 'center'
+         textAlign: 'center',
+         color:'#FFF'
      },
      subTitle: {
          color: '#a9a9a9',

@@ -46,97 +46,86 @@ export class DrawerNavigation extends React.Component {
     render() {
         return (
             <ScrollView style={{flex: 1}}>
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <Text style={styles.headerText}>Home</Text>
+            <Image style={styles.container} source={require('../../../resource/images/gradient-diamond-blur6.png')}>
+                <View style={{height:80,alignItems:'center',borderBottomWidth:0.5,borderBottomColor:'#FFF'}}>
                 </View>
-                <View style={[styles.navCategoryWrapper]}>
-                    <View style={styles.navCategoryRow}>
-                        <View style={styles.navItem}>
-                            <Icon name="home" color="#FFF" size={35} />
-                            <Text style={styles.navItemText}>Home</Text>
-                        </View>
-                        <View style={styles.navItem}>
-                            <Icon name="info-circle" color="#FFF" size={35} />
-                            <Text style={styles.navItemText}>About Us</Text>
-                        </View>
-                    </View>
+                <View style={styles.navItem}>
+                    <Icon style={{marginLeft:15,width:23,height:23}} name="home" color="#FFF" size={23} />
+                    <Text style={styles.navItemText}>Home</Text>
+                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
                 </View>
-                <View style={[styles.navCategoryWrapper, { borderTopWidth: 0}]}>
-                    <View style={styles.navCategoryRow}>
-                        <View style={styles.navItem}>
-                            <Icon name="phone" color="#FFF" size={35} />
-                            <Text style={styles.navItemText}>Contact Us</Text>
-                        </View>
-                        <View style={styles.navItem}>
-                            <Icon name="comment" color="#FFF" size={35} />
-                            <Text style={styles.navItemText}>Feedback</Text>
-                        </View>
-                    </View>
+                <View style={styles.navItem}>
+                    <Icon style={{marginLeft:15,width:23,height:23}} name="bullhorn" color="#FFF" size={23} />
+                    <Text style={styles.navItemText}>Latest Audios</Text>
+                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
                 </View>
-                <View style={styles.header}>
-                    <Text style={styles.headerText}>Audios</Text>
+                <View style={styles.navItem}>
+                    <Icon style={{marginLeft:15,width:23,height:23}} name="bars" color="#FFF" size={23} />
+                    <Text style={styles.navItemText}>Categories</Text>
+                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
                 </View>
-                <View style={[styles.navCategoryWrapper]}>
-                    <View style={styles.navCategoryRow}>
-                        <View style={styles.navItem}>
-                            <Icon name="music" color="#FFF" size={35} />
-                            <Text style={styles.navItemText}>Lastest</Text>
-                        </View>
-                        <View style={styles.navItem}>
-                            <Icon name="user" color="#FFF" size={35} />
-                            <Text style={styles.navItemText}>Categories</Text>
-                        </View>
-                    </View>
+                <View style={styles.navItem}>
+                    <Image style={{marginLeft:15,width:24,height:24}} source={require('../../../resource/images/collections.png')} />
+                    <Text style={styles.navItemText}>Collections</Text>
+                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
                 </View>
-                <View style={[styles.navCategoryWrapper, { borderTopWidth: 0}]}>
-                    <View style={styles.navCategoryRow}>
-                        <View style={styles.navItem}>
-                            <Icon name="file-text" color="#FFF" size={35} />
-                            <Text style={styles.navItemText}>Author</Text>
-                        </View>
-                        <View style={styles.navItem}>
-                            <Icon name="tasks" color="#FFF" size={35} />
-                            <Text style={styles.navItemText}>Topics</Text>
-                        </View>
-                    </View>
+                <View style={styles.navItem}>
+                    <Icon style={{marginLeft:15,width:23,height:23}} name="video-camera" color="#FFF" size={23} />
+                    <Text style={styles.navItemText}>Videos</Text>
+                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
                 </View>
-                <View style={styles.header}>
-                    <Text style={styles.headerText}>Other</Text>
+                <View style={styles.navItem}>
+                    <Icon style={{marginLeft:15,width:23,height:23}} name="binoculars" color="#FFF" size={23} />
+                    <Text style={styles.navItemText}>Surprise Me</Text>
+                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
                 </View>
-                <View style={[styles.navCategoryWrapper]}>
-                    <View style={styles.navCategoryRow}>
-                        <View style={styles.navItem}>
-                            <Icon name="video-camera" color="#FFF" size={35} />
-                            <Text style={styles.navItemText}>Videos </Text>
-                        </View>
-                        <View style={styles.navItem}>
-                            <Icon name="heart" color="#FFF" size={35} />
-                            <Text style={styles.navItemText}>Favourites</Text>
-                        </View>
-                    </View>
+                <View style={styles.navItem}>
+                    <Image style={{marginLeft:15,width:25,height:25}} source={require('../../../resource/images/addplaylist.png')} />
+                    <Text style={styles.navItemText}>My Playlist</Text>
+                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
                 </View>
+                <View style={styles.navItem}>
+                    <Icon style={{marginLeft:15,width:23,height:23}} name="cog" color="#FFF" size={23} />
+                    <Text style={styles.navItemText}>Settings</Text>
+                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
+                </View>
+                <View style={styles.navItem}>
+                    <Icon style={{marginLeft:15,width:23,height:23}} name="share-square-o" color="#FFF" size={23} />
+                    <Text style={styles.navItemText}>Contact Us</Text>
+                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
+                </View>
+                <View style={styles.navItem}>
+                    <Icon style={{marginLeft:15,width:23,height:23}} name="info-circle" color="#FFF" size={23} />
+                    <Text style={styles.navItemText}>About</Text>
+                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
+                </View>
+                <View style={styles.navItem}>
+                    <Icon style={{marginLeft:15,width:23,height:23}} name="question-circle" color="#FFF" size={23} />
+                    <Text style={styles.navItemText}>Tutorial</Text>
+                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
+                </View>
+                <View style={styles.navItem}>
+                    <Icon style={{marginLeft:15,width:23,height:23}} name="share-alt" color="#FFF" size={23} />
+                    <Text style={styles.navItemText}>Share this App</Text>
+                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
+                </View>
+
                 <View style={styles.socialIconsWrapper}>
                     <View style={styles.socialIcon}>
-                        <Icon name="facebook" size={18} color="#FFF" />
+                        <Image style={{width:30,height:30,borderRadius:50,borderColor:'#FFF',borderWidth:2}} source={require('../../../resource/images/social-facebook.png')} />
                     </View>
                     <View style={styles.socialIcon}>
-                        <Icon name="twitter" size={18} color="#FFF" />
+                        <Image style={{width:30,height:30,borderRadius:50,borderColor:'#FFF',borderWidth:2}} source={require('../../../resource/images/social-twitter.png')} />
                     </View>
                     <View style={styles.socialIcon}>
-                        <Icon name="instagram" size={18} color="#FFF" />
+                        <Image style={{width:30,height:30,borderRadius:50,borderColor:'#FFF',borderWidth:2}} source={require('../../../resource/images/social-google.png')} />
                     </View>
                     <View style={styles.socialIcon}>
-                        <Icon name="google" size={18} color="#FFF" />
+                        <Image style={{width:30,height:30,borderRadius:50,borderColor:'#FFF',borderWidth:2}} source={require('../../../resource/images/social-youtube.png')} />
                     </View>
                 </View>
-                <View style={styles.helpBtn}>
-                    <View style={styles.helpBtnIcon}>
-                        <Icon name="question" color="#FFF" size={18} />
-                    </View>
-                    <Text style={styles.helpBtnText}>Help</Text>
-                </View>
-            </View>
+
+            </Image>
             </ScrollView>
         );
     }
@@ -148,7 +137,8 @@ export class DrawerNavigation extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
-        backgroundColor:'#14324A',
+        height:null,
+        width:null
     },
     header: {
         padding: 5,
@@ -167,17 +157,18 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     navItem: {
-        flex: 1,
-        borderColor: '#10263D',
-        borderRightWidth: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 10
+        height:40,
+        flexDirection:'row',
+        alignItems:'center',
+        borderBottomWidth:1,
+        borderBottomColor:'#999'
     },
     navItemText: {
-        color: '#FFF',
-        fontFamily: 'Tahoma',
-        fontSize: 13
+        width:150,
+        color:'#FFF',
+        fontWeight:'bold',
+        fontSize:15,
+        marginLeft:60
     },
     helpBtn: {
         padding: 10,
@@ -205,12 +196,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 10,
-        paddingTop: 50,
-        paddingBottom: 50
+        paddingTop: 20,
     },
     socialIcon: {
-        width: 40,
-        height: 40,
+        width: 30,
+        height: 30,
         borderRadius: 20,
         backgroundColor: '#10263D',
         justifyContent: 'center',

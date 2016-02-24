@@ -66,73 +66,58 @@ export class SlidingPlayer extends React.Component {
         let backgroundImageUrl = 'http://supercolortuts.com/Tuts_Files/Tutorials/Perfect_iOS_7_Style_Blur_Background/Perfect_iOS_7_Style_Blur_Background_010.jpg';
 
         return (
-            <View style={styles.container}>
+            <Image style={styles.container} source={require('../../../resource/images/gradient-diamond-blur3.png')}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Image source={{uri: coverImage}} style={styles.cover} />
+                    <Image source={require('../../../resource/images/mufti.jpeg')} style={styles.cover} />
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{PropertyExtractor.getProperty(this.state.playback, 'audio_title')}</Text>
-                    <Text style={styles.subTitle}>{PropertyExtractor.getProperty(this.state.playback, 'preacher_name')}</Text>
-                </View>
-                <TouchableWithoutFeedback onPress={this.processMedia.bind(this)}>
-                    <View style={styles.buttonContainer}>
-                        <Icon name={icon} color="#999" size={25} />
+                    <Text style={styles.title}>Mufti Menk</Text>
+                    <Text style={styles.subTitle}>364 Audios</Text>
+                    <View style={{marginTop:2, borderWidth:3, borderColor:'rgba(123,32,42,0.5)',marginRight:12,backgroundColor:'rgba(255,255,255,0.5)',alignItems:'center',width:80,borderRadius:35}}>
+                        <Text style={{color:'#FFF',marginBottom:3}}>subscribe</Text>
                     </View>
-                </TouchableWithoutFeedback>
+
                 </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center'}}>
-                <Text>00:00</Text>
-                <Slider style={{flex: 1, marginLeft: 10, marginRight: 10 }}
-            trackStyle={styles.track}
-            thumbStyle={styles.thumb}
-            minimumTrackTintColor='#30a935'
-          />
-          <Text>00:00</Text>
+
                 </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center'}}>
-                    <Icon name="ios-shuffle-strong" color="#999" size={25} />
-                        <View style={{alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row'}}>
-                            <Icon name="ios-rewind" color="#999" size={35} />
-                            <View style={{ alignItems: 'center', justifyContent: 'center'}}>
-                                <Icon name="ios-play" color="#30B55A" size={45} style={{marginRight: 15, marginLeft: 15}} />
-                            </View>
-                            <Icon name="ios-fastforward" color="#999" size={35} />
-                        </View>
-                    <Icon name="ios-infinite" color="#999" size={25} />
-                </View>
-            </View>
+
+            </Image>
         );
     }
 
 }
-
 /**
+
  * @style
  */
 const styles = StyleSheet.create({
     container: {
+        width:null,
+        height:100,
         alignItems: 'stretch',
         padding: 10,
         backgroundColor: '#FFF',
-        paddingBottom: 10,
-        borderBottomColor: '#ECECEC',
-        borderBottomWidth: 1
+        paddingBottom: 10
     },
     cover: {
-        height: 40,
-        width: 40,
-        backgroundColor: '#FFF'
+        height: 80,
+        width: 80,
+        borderColor:'#FFF',
+        borderWidth:3,
+        borderRadius:50
     },
     titleContainer: {
         flexDirection: 'column',
-        marginLeft: 10,
+        marginLeft: 35,
         flex: 1
     },
     title: {
-        color: '#999',
-        fontWeight: 'bold'
+        color: '#FFF',
+        fontWeight: 'bold',
+        fontSize:20,
+        marginBottom:4
     },
     subTitle: {
-        color: '#CCC'
+        color: '#CCC',
     },
     buttonContainer: {
         paddingLeft: 10,

@@ -101,20 +101,16 @@ export class SlidingQueue extends React.Component {
         return (
             <View style={styles.row}>
                 <View style={styles.titleWrapper}>
-                    <Image style={styles.cover} source={{uri: coverImage}}>
-                        <TouchableWithoutFeedback onPress={() => { this.playQueue(rowData) }}>
-                            <View style={this.playBtn}>
-                                <Icon name={playIcon} style={[styles.playerIcon]} size={23} color="#FFF" />
-                            </View>
-                        </TouchableWithoutFeedback>
-                    </Image>
+
                     <View style={styles.queueItemWrapper}>
                         <Text style={styles.queueItemTitle}>{title}</Text>
                         <Text style={styles.queueItemPreacher}>{preacher}</Text>
                     </View>
                     <TouchableWithoutFeedback onPress={() => this.onPopoutQueue(rowID)}>
                         <View style={styles.queueItemDeleteBtn}>
-                            <Icon name="trash-b" style={[styles.playerIcon]} size={23} color="#999" />
+                            <Icon name="android-arrow-dropright-circle" style={[styles.playerIcon]} size={23} color="#FFF" />
+                            <Icon name="android-download" style={[styles.playerIcon]} size={23} color="#FFF" />
+                            <Icon name="android-share-alt" style={[styles.playerIcon]} size={23} color="#FFF" />
                         </View>
                     </TouchableWithoutFeedback>
                 </View>
@@ -129,34 +125,18 @@ export class SlidingQueue extends React.Component {
     render() {
         let backgroundImageUrl = 'http://wiki-fx.net/wp-content/uploads/2013/08/Black-Background-Collapsar-1080x1920.jpg';
         return (
-            <View style={styles.container}>
-            <Titlebar title=" New Release" />
+            <Image style={styles.container} source={require('../../../resource/images/gradient-diamond-blur4.png')}>
+            <Titlebar/>
             <SlidingPlayer />
+            <View style={{height: 2, backgroundColor:'#D7523B'}}/>
                 <ListView dataSource={this.state.dataSource}
                     renderRow={this.renderRow.bind(this)}
                     style={{flex: 1}} />
-                    <View style={{height:50, backgroundColor: '#FFF', borderTopWidth: 1, borderTopColor: '#ECECEC', flexDirection: 'row'}}>
-                        <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
-                            <Icon name="home" size={23} color="#999" />
-                            <Text>Home</Text>
-                        </View>
-                        <View style={{width: 1, backgroundColor:'#CCC', marginTop: 10, marginBottom: 10}} />
-                        <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
-                            <Icon name="music-note" size={23} color="#999" />
-                            <Text>Player</Text>
-                        </View>
-                        <View style={{width: 1, backgroundColor:'#CCC', marginTop: 10, marginBottom: 10}} />
-                        <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
-                            <Icon name="search" size={23} color="#999" />
-                            <Text>Search</Text>
-                        </View>
-                        <View style={{width: 1, backgroundColor:'#CCC', marginTop: 10, marginBottom: 10}} />
-                        <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
-                            <Icon name="ios-cog" size={23} color="#999" />
-                            <Text>Settings</Text>
-                        </View>
-                    </View>
+
+            <View style={{height: 50, backgroundColor: '#380428', justifyContent: 'center', alignItems: 'center'}}>
+                <Text style={styles.advetisement}>Ad Banner</Text>
             </View>
+            </Image>
         );
     }
 }
@@ -171,9 +151,11 @@ const styles = StyleSheet.create({
         flexDirection: 'column'
     },
     row: {
-        padding: 5,
+        padding: 10,
         flexDirection: 'column',
-        alignItems: 'stretch'
+        alignItems: 'stretch',
+        backgroundColor:'rgba(0,0,0,0.4)',
+        marginTop:2
     },
     cover: {
         width: 40,
@@ -205,7 +187,8 @@ const styles = StyleSheet.create({
     },
     queueItemTitle: {
         fontSize: 14,
-        color: '#999'
+        color: '#FFF',
+        fontWeight:'bold'
     },
     queueItemPreacher: {
         color: '#ccc'
@@ -215,5 +198,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginRight: 20
+    },
+    advetisement:{
+        fontSize:15,
+        color:"#999"
     }
 });

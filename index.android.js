@@ -20,6 +20,11 @@ import { Album } from './src/components/album/Album';
 import { AppConfig } from './src/constants/AppConfig';
 import { AppStore } from './src/stores/AppStore';
 import { Detail } from './src/components/shared/Detail';
+import { SongCategories } from './src/components/landing/SongCategories';
+import { SlidingQueue } from './src/components/player/SlidingQueue';
+import { SlidingPlayer } from './src/components/player/SlidingPlayer';
+import { Player } from './src/components/player/Player';
+import { SongList } from './src/components/player/SongList';
 // Constant imports
 import { LocaleConfig, LocaleString } from './src/constants/LocaleConfig';
 

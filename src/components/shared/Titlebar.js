@@ -6,7 +6,7 @@
  */
  'use strict';
 
-import React, { Text, View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import React, { Text, View, StyleSheet, TouchableWithoutFeedback,Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { AppStore } from '../../stores/AppStore';
@@ -39,14 +39,14 @@ export class Titlebar extends React.Component {
      */
     render() {
         return (
-            <View style={styles.container}>
+            <Image style={styles.container} source={require('../../../resource/images/titleBar.jpg')}>
                 <View style={styles.titleFlex}>
                     <Text style={styles.titleHead}>{this.props.title || 'Urudu Audio'}</Text>
                 </View>
                 <View style={styles.rightWrapper}>
                     <Icon name="search" size={25} color="#FFF" style={styles.icon}  />
                 </View>
-            </View>
+            </Image>
         );
     }
 }
@@ -56,6 +56,7 @@ export class Titlebar extends React.Component {
  */
 const styles = StyleSheet.create({
     container: {
+        width:null,
         height: 55,
         flexDirection: 'row',
         padding: 5,

@@ -13,6 +13,7 @@ import { CategoryStore } from '../../stores/CategoryStore';
 import { PropertyExtractor } from '../../core/PropertyExtractor';
 import { Titlebar } from '../shared/Titlebar';
 import { Author } from '../shared/Author';
+import { Advertisement } from './Advertisement'
 /**
  * @class NewRelease
  * @extends React.Component
@@ -69,10 +70,8 @@ export class AuthorList extends React.Component {
     renderRow(rowData) {
         let component = (
             <View style={styles.rowContainer}>
-                <View style={styles.rowHeader}>
-                    <Text>{rowData}</Text>
-                </View>
-                <View style={{alignItems: 'center', justifyContent: 'center', padding: 10, flexDirection: 'row', flexWrap: 'wrap', backgroundColor: 'rgba(255, 255, 255, 0.3)'}}>
+
+                <View style={{marginLeft:6,marginRight:6,borderRadius:7,alignItems: 'center', justifyContent: 'center', padding: 4, flexDirection: 'row', flexWrap: 'wrap', backgroundColor: 'rgba(0, 0, 0, 0.4)'}}>
                     {(()=>{
                         let arr = [];
                         if(this.authors[rowData]) {
@@ -98,48 +97,26 @@ export class AuthorList extends React.Component {
      * @render
      * @return {View} container
      */
-    render() {
-        return (
-            <View style={styles.container}>
-            <Titlebar/>
-
-
-            <Image style={{flex: 1}} source={{uri:'http://www.webdesigndev.com/wp-content/uploads/2014/09/5-Blurred-Backgrounds-Vol.1.jpg'}}>
-            <View style={styles.dummy}>
-            <Icon name="search" size={25} color="#999" style={{marginLeft:10, marginRight: 10}} />
-            <TextInput underlineColorAndroid="rgba(255, 255, 255, 0.3)" style={{flex:1}} placeholder="Search Authors" />
-            </View>
-            <ListView style={{flex:1}}
-                dataSource={this.state.dataSource}
-                renderRow={this.renderRow.bind(this)} />
-            </Image>
-
-
-                <View style={{height:50, backgroundColor: '#FFF', borderTopWidth: 1, borderTopColor: '#ECECEC', flexDirection: 'row'}}>
-                    <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
-                        <Icon name="home" size={23} color="#999" />
-                        <Text>Home</Text>
+     render() {
+         return (
+             <View style={styles.container}>
+                <Titlebar/>
+                <Image style={{flex: 1,width:null}} source={require('../../../resource/images/gradient-diamond.png')}>
+                    <View style={styles.dummy}>
+                        <Icon name="search" size={25} color="#FFF" style={{marginLeft:10, marginRight: 10}} />
+                        <TextInput underlineColorAndroid="rgba(255, 255, 255, 0.3)" style={{flex:1,color:'#FFF'}} placeholder="Search Authors" />
                     </View>
-                    <View style={{width: 1, backgroundColor:'#CCC', marginTop: 10, marginBottom: 10}} />
-                    <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
-                        <Icon name="music-note" size={23} color="#999" />
-                        <Text>Player</Text>
-                    </View>
-                    <View style={{width: 1, backgroundColor:'#CCC', marginTop: 10, marginBottom: 10}} />
-                    <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
-                        <Icon name="search" size={23} color="#999" />
-                        <Text>Search</Text>
-                    </View>
-                    <View style={{width: 1, backgroundColor:'#CCC', marginTop: 10, marginBottom: 10}} />
-                    <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
-                        <Icon name="ios-cog" size={23} color="#999" />
-                        <Text>Settings</Text>
-                    </View>
-                </View>
-            </View>
-        );
-    }
-}
+                    <ListView style={{flex:1}}
+                        dataSource={this.state.dataSource}
+                        renderRow={this.renderRow.bind(this)} />
+                    <Advertisement/>
+                </Image>
+
+             </View>
+         );
+     }
+ }
+
 
 /**
  * @style
@@ -165,19 +142,21 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     rowContainer: {
-        backgroundColor: 'rgba(255, 255, 255, 0.3)',
-        margin: 5
+        margin: 5,
+        borderRadius:10
     },
     rowHeader: {
-        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
         padding: 5,
-        borderBottomWidth: 1,
-        borderBottomColor: '#F4F4F4',
-        borderTopColor: '#F4F4F4',
-        borderTopWidth: 1
+        color:'#FFF'
     },
     dummy: {
-backgroundColor:'rgba(255, 255, 255, 0.3)',
-margin: 5, flexDirection: 'row', alignItems: 'center'
+        height:40,
+        backgroundColor:'rgba(0, 0, 0, 0.4)',
+        margin: 5,
+        marginLeft:11,
+        marginRight:11,
+        flexDirection: 'row',
+        alignItems: 'center'
     }
 });
