@@ -1,5 +1,6 @@
 package com.bluefish.packages;
 
+import com.bluefish.components.YoutubePlayer;
 import com.bluefish.modules.MediaModule;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
@@ -30,6 +31,7 @@ public class BluefishPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         List<ViewManager> modules = new ArrayList<ViewManager>();
+        modules.add(new YoutubePlayer());
         return modules;
     }
 }

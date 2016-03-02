@@ -17,6 +17,8 @@
       * @return {Object} value
       */
       getProperty: function(row, key) {
+          if(row==null || row==undefined)
+            return null;
           if(row[key] && row[key].length > 0) {
               return row[key][0];
           }

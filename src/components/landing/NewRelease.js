@@ -6,7 +6,7 @@
  */
 'use strict';
 
-import React, { Text, View, StyleSheet, ScrollView, ToastAndroid, } from 'react-native';
+import React, { Text, View, StyleSheet, ScrollView, ToastAndroid, NativeModules} from 'react-native';
 import { CoverTile } from '../shared/CoverTile';
 import { CategoryStore } from '../../stores/CategoryStore';
 import { SlidingQueue } from '../player/SlidingQueue';
@@ -37,6 +37,7 @@ export class NewRelease extends React.Component {
     }
 
     onTilePress() {
+        NativeModules.MediaHelper.touch();
         this.props.navigator.push({ title: 'New Release', component: SlidingQueue, props: { navigator: this.props.navigator }});
     }
 

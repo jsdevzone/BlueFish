@@ -64,15 +64,26 @@ export class SlidingPlayer extends React.Component {
         let coverImage = AppConfig.IMAGE_BASE_PATH + PropertyExtractor.getProperty(this.state.playback, 'image');
         let icon = "ios-download"
         let backgroundImageUrl = 'http://supercolortuts.com/Tuts_Files/Tutorials/Perfect_iOS_7_Style_Blur_Background/Perfect_iOS_7_Style_Blur_Background_010.jpg';
+        let img = null;
+
+        img =<Image source={require('../../../resource/images/mufti.jpeg')} style={styles.cover} />
+
+        let title = ""
+
+        if(this.props.type == 'author') {
+            title = PropertyExtractor.getProperty(this.props.author, 'preacher_title');
+            let coverImage = "http://bhatkallys.com/wp-content/uploads/sermons/images/" + PropertyExtractor.getProperty(this.props.author, 'image');
+            img =<Image source={{uri:coverImage}} style={styles.cover} />;
+        }
 
         return (
             <Image style={styles.container} source={require('../../../resource/images/gradient-diamond-blur3.png')}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <Image source={require('../../../resource/images/mufti.jpeg')} style={styles.cover} />
+                    {img}
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>Mufti Menk</Text>
-                    <Text style={styles.subTitle}>364 Audios</Text>
-                    <View style={{marginTop:2, borderWidth:3, borderColor:'rgba(123,32,42,0.5)',marginRight:12,backgroundColor:'rgba(255,255,255,0.5)',alignItems:'center',width:80,borderRadius:35}}>
+                    <Text style={styles.title}>{title}</Text>
+                    <Text style={styles.subTitle}>{this.props.count} Audios</Text>
+                    <View style={styles.subscribe}>
                         <Text style={{color:'#FFF',marginBottom:3}}>subscribe</Text>
                     </View>
 
@@ -111,7 +122,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     title: {
-        color: '#FFF',
+        color: '#000',
         fontWeight: 'bold',
         fontSize:20,
         marginBottom:4
@@ -147,5 +158,15 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 2},
     shadowRadius: 2,
     shadowOpacity: 0.35,
-  }
+   },
+   subscribe: {
+       marginTop:2,
+       borderWidth:3,
+       borderColor:'rgba(123,32,42,0.5)',
+       marginRight:12,
+       backgroundColor:'rgba(255,255,255,0.5)',
+       alignItems:'center',
+       width:80,
+       borderRadius:35
+   },
 });

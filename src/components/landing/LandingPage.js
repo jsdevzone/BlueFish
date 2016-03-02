@@ -6,7 +6,7 @@
  */
 'use strict';
 
-import React, { Text, View, StyleSheet, Image, ScrollView, TouchableWithoutFeedback,  } from 'react-native';
+import React, { Text, View, StyleSheet, Image, ScrollView, TouchableWithoutFeedback, TouchableOpacity,NativeModules } from 'react-native';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import SlidingUpPanel from '../ux/SlidingPanel';
 import Dimensions from 'Dimensions';
@@ -52,12 +52,18 @@ export class LandingPage extends React.Component {
     }
 
     onAuthor() {
+        NativeModules.MediaHelper.touch();
         this.props.navigator.push({ title: 'Authors', component: AuthorList, props: { navigator: this.props.navigator }});
     }
 
 
     onCategoryPress() {
+        NativeModules.MediaHelper.touch();
         this.props.navigator.push({ title: 'Categories', component: SongCategories, props: { navigator: this.props.navigator }});
+    }
+
+    onTouch(){
+        NativeModules.MediaHelper.touch();
     }
 
     /**
@@ -70,8 +76,10 @@ export class LandingPage extends React.Component {
                 <Titlebar />
                 <ScrollView style={{flex:1}}>
                 <ScrollView  showsHorizontalScrollIndicator={true} horizontal={true}>
-                    <View style={{flexDirection:'row',height:100,alignItems:'center',marginLeft:7}}>
+                    <View style={styles.addBannerContainer}>
+                    <TouchableOpacity onPress={this.onTouch.bind(this)}>
                         <Image style={{width:150,height:80,borderRadius:10}} source={require('../../../resource/images/ad2.png')}></Image>
+                    </TouchableOpacity>
                         <Image style={{width:150,height:80,marginLeft:5,borderRadius:10}} source={require('../../../resource/images/ad3.png')}></Image>
                         <Image style={{width:150,height:80,marginLeft:5,borderRadius:10}} source={require('../../../resource/images/ad1.jpg')}></Image>
                     </View>
@@ -103,5 +111,11 @@ export class LandingPage extends React.Component {
      textAlign: 'center',
      color: '#333333',
      marginBottom: 5,
+   },
+   addBannerContainer: {
+       flexDirection:'row',
+       height:100,
+       alignItems:'center',
+       marginLeft:7
    },
  });

@@ -29,7 +29,7 @@ export class PopularSpeakers extends React.Component {
              </View>
              <View style={{backgroundColor:'rgba(0,0,0,0.5)', flex: 1}}>
                 <ScrollView showsHorizontalScrollIndicator={true} horizontal={true}>
-                <View style={{borderColor: '#000', borderWidth: 2, flex: 1, flexDirection: 'row', alignItems: 'stretch'}}>
+                <View style={styles.popularImageContainer}>
                     <Image style={{width:70,height:70}} source={require('../../../resource/images/mufti.jpeg')}/>
                     <Image style={{width:70,height:70,marginLeft:3}} source={{uri:'http://bhatkallys.com/wp-content/uploads/sermons/images/200X200 - Jafer-Faqui.jpg'}}/>
                     <Image style={{width:70,height:70,marginLeft:3}} source={{uri:'http://bhatkallys.com/wp-content/uploads/sermons/images/200X200- Jagan_Nath_Azad..jpg'}}/>
@@ -56,5 +56,12 @@ const styles = StyleSheet.create({
          width: null,
          alignItems: 'stretch',
 
-     }
+     },
+     popularImageContainer: {
+         borderColor: '#000',
+         borderWidth: 2,
+         flex: 1,
+         flexDirection: 'row',
+         alignItems: 'stretch'
+     },
 });

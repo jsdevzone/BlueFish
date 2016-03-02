@@ -25,6 +25,8 @@ import { SlidingQueue } from './src/components/player/SlidingQueue';
 import { SlidingPlayer } from './src/components/player/SlidingPlayer';
 import { Player } from './src/components/player/Player';
 import { SongList } from './src/components/player/SongList';
+import { CurrentPlayback } from './src/components/shared/CurrentPlayback';
+import { Videos } from './src/components/player/Videos';
 // Constant imports
 import { LocaleConfig, LocaleString } from './src/constants/LocaleConfig';
 
@@ -81,15 +83,24 @@ class BlueFish extends React.Component {
             * Checks whether device is connected to the network
             * @state {Boolean} hasNetWorkConnection
             */
-            hasNetWorkConnection: false
+            hasNetWorkConnection: false,
+            isPlaying: false,
+            currentPlayback:null,
          };
 
          AppStore.on('draweropen', this.onDrawerOpen.bind(this))
+         AppStore.on('playbackstarted', this.onPlaybackStarted.bind(this))
      }
 
      onDrawerOpen() {
          this.drawer.openDrawer();
      }
+
+     onPlaybackStarted(playback) {
+         this.setState({ isPlaying: true,currentPlayback:playback });
+     }
+
+
 
      /**
       * Process the routes and renders the appropriate component on the screen.
@@ -104,11 +115,15 @@ class BlueFish extends React.Component {
          let Component = route.component;
 
          let hasNetWorkConnection = null;
+         let player = null;
          /**
           * If the connection lost show a banner in top of the screen saying that the connection lost.
           */
          if(!this.state.hasNetWorkConnection)
-            hasNetWorkConnection = (<NetworkInfo navigator={navigator} />)
+            hasNetWorkConnection = (<NetworkInfo navigator={navigator} />);
+
+            if(this.state.isPlaying)
+                player = (<CurrentPlayback playback={this.state.currentPlayback} />);
         /**
          * render the application with the current navigator component
          */
@@ -119,6 +134,7 @@ class BlueFish extends React.Component {
                     <View style={styles.container}>
                         { hasNetWorkConnection }
                         <Component {...route.props} navigator={navigator} />
+                        { player }
                     </View>
             </DrawerLayoutAndroid>
         );

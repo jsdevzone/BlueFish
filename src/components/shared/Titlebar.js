@@ -6,7 +6,7 @@
  */
  'use strict';
 
-import React, { Text, View, StyleSheet, TouchableWithoutFeedback,Image } from 'react-native';
+import React, { Text, View, StyleSheet, TouchableWithoutFeedback,Image,TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { AppStore } from '../../stores/AppStore';
@@ -40,11 +40,16 @@ export class Titlebar extends React.Component {
     render() {
         return (
             <Image style={styles.container} source={require('../../../resource/images/titleBar.jpg')}>
+                <TouchableOpacity onPress={this.onMenuIconPress.bind(this)}>
+                    <Icon name="navicon" size={25} color="#FFF" style={styles.icon}  />
+                </TouchableOpacity>
                 <View style={styles.titleFlex}>
                     <Text style={styles.titleHead}>{this.props.title || 'Urudu Audio'}</Text>
                 </View>
                 <View style={styles.rightWrapper}>
-                    <Icon name="search" size={25} color="#FFF" style={styles.icon}  />
+                    <TouchableOpacity>
+                        <Icon name="search" size={25} color="#FFF" style={styles.icon}  />
+                    </TouchableOpacity>
                 </View>
             </Image>
         );

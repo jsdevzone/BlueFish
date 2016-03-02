@@ -6,7 +6,7 @@
  */
 'use strict';
 
-import React, { Text, View, StyleSheet, Image, TextInput, ScrollView, TouchableWithoutFeedback, ListView } from 'react-native';
+import React, { Text, View, StyleSheet, Image, TextInput, ScrollView, TouchableWithoutFeedback, ListView,TouchableOpacity,NativeModules } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { CoverTile } from '../shared/CoverTile';
 import { CategoryStore } from '../../stores/CategoryStore';
@@ -14,6 +14,7 @@ import { PropertyExtractor } from '../../core/PropertyExtractor';
 import { Titlebar } from '../shared/Titlebar';
 import { Author } from '../shared/Author';
 import { Advertisement } from './Advertisement'
+import { SlidingQueue } from '../player/SlidingQueue';
 /**
  * @class NewRelease
  * @extends React.Component
@@ -38,6 +39,15 @@ export class AuthorList extends React.Component {
             dataSource: this.dataSource.cloneWithRows(this.data),
             authors: {}
         };
+    }
+
+    onSlidingQueue(author) {
+        NativeModules.MediaHelper.touch();
+        this.props.navigator.push({ title: 'SlidingQueue', component: SlidingQueue, props: {
+            navigator: this.props.navigator,
+            type: 'author',
+            author: author
+        }});
     }
 
     componentDidMount() {
@@ -71,7 +81,7 @@ export class AuthorList extends React.Component {
         let component = (
             <View style={styles.rowContainer}>
 
-                <View style={{marginLeft:6,marginRight:6,borderRadius:7,alignItems: 'center', justifyContent: 'center', padding: 4, flexDirection: 'row', flexWrap: 'wrap', backgroundColor: 'rgba(0, 0, 0, 0.4)'}}>
+                <View style={styles.rowColor}>
                     {(()=>{
                         let arr = [];
                         if(this.authors[rowData]) {
@@ -80,7 +90,9 @@ export class AuthorList extends React.Component {
                                 if(image != null && image != '') {
                                     let coverImage = "http://bhatkallys.com/wp-content/uploads/sermons/images/" + PropertyExtractor.getProperty(author, 'image');
                                     arr.push(
-                                        <Author key={index} author={author} />
+                                        <TouchableOpacity onPress={() => this.onSlidingQueue(author)}>
+                                            <Author key={index} author={author} />
+                                        </TouchableOpacity>
                                     );
                                 }
                             });
@@ -104,7 +116,7 @@ export class AuthorList extends React.Component {
                 <Image style={{flex: 1,width:null}} source={require('../../../resource/images/gradient-diamond.png')}>
                     <View style={styles.dummy}>
                         <Icon name="search" size={25} color="#FFF" style={{marginLeft:10, marginRight: 10}} />
-                        <TextInput underlineColorAndroid="rgba(255, 255, 255, 0.3)" style={{flex:1,color:'#FFF'}} placeholder="Search Authors" />
+                        <TextInput placeholderTextColor ="#FFF" underlineColorAndroid="rgba(255, 255, 255, 0.3)" style={{flex:1,color:'#FFF'}} placeholder="Search Authors" />
                     </View>
                     <ListView style={{flex:1}}
                         dataSource={this.state.dataSource}
@@ -144,6 +156,17 @@ const styles = StyleSheet.create({
     rowContainer: {
         margin: 5,
         borderRadius:10
+    },
+    rowColor: {
+        marginLeft:6,
+        marginRight:6,
+        borderRadius:7,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 4,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        backgroundColor: 'rgba(0, 0, 0, 0.4)'
     },
     rowHeader: {
         backgroundColor: 'rgba(0, 0, 0, 0.4)',

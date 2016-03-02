@@ -16,9 +16,9 @@ import { CategoryStore } from '../../stores/CategoryStore';
 import { AppStore } from '../../stores/AppStore';
 import { PropertyExtractor } from '../../core/PropertyExtractor';
 import { AppConfig } from '../../constants/AppConfig';
-import { Player } from './Player';
+import { Player } from '../player/Player';
 import { Titlebar } from '../shared/Titlebar';
-import { SlidingPlayer } from './SlidingPlayer';
+import { SlidingPlayer } from '../player/SlidingPlayer';
 
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 const DEVICE_WIDTH =  Dimensions.get('window').width;
@@ -27,7 +27,7 @@ const DEVICE_WIDTH =  Dimensions.get('window').width;
   * @class SlidingQueue
   * @extends React.Component
   */
-export class SlidingQueue extends React.Component {
+export class Favourites extends React.Component {
 
      /**
       * @constructor
@@ -62,24 +62,16 @@ this.end = 50;
     }
 
     componentDidMount() {
-        if(this.props.type == 'category') {
-            CategoryStore.getCategoryPlaybacks(this.props.catId).then(this.onPlaybacksLoaded.bind(this));
-        }
-
-        if(this.props.type=='author') {
-            let authorId = PropertyExtractor.getProperty(this.props.author, 'id');
-            CategoryStore.getAuthorPlaybacks(authorId).then(this.onPlaybacksLoaded.bind(this));
-        }
-
-        else {
-            CategoryStore.getLatestAlbums(this.start, this.end).then(this.onPlaybacksLoaded.bind(this));
-        }
+        AppStore.getPlaylist(playlist => {
+            this.onPlaybacksLoaded(playlist);
+        })
     }
 
     onPlaybacksLoaded(json) {
+
         if(this.state.data.length > 0) {
             let data = this.state.data;
-            data.push(json.Audios.Audio)
+            data.push(json)
 
             this.setState({
                 data: data,
@@ -90,27 +82,39 @@ this.end = 50;
         else {
 
             this.setState({
-                data: json.Audios.Audio,
-                dataSource : this.listDataSource.cloneWithRows(json.Audios.Audio),
-                count: json.Audios.Audio.length
+                data: json,
+                dataSource : this.listDataSource.cloneWithRows(json),
+                count: json.length
             });
         }
     }
 
-    download(playback) {
-        let playbackUrl = AppConfig.PLAYBACK_BASE_PATH + encodeURIComponent(PropertyExtractor.getProperty(playback, 'filename'));
-        NativeModules.MediaHelper.downloadMedia(playbackUrl, function(){
-            AppStore.addToPlaylist(playback);
-            ToastAndroid.show('Downloaded', ToastAndroid.LONG);
-            NativeModules.MediaHelper.downloadCompleteNotification();
+    deleteFavourites(playback) {
+        NativeModules.MediaHelper.touch();
+        AppStore.deletePlayback(playback,() => {
+            let idx = null;
+            let data = this.state.data;
+            data.map((item, index) => {
+                if(PropertyExtractor.getProperty(playback, 'id') == PropertyExtractor.getProperty(item, 'id')) {
+                    idx = index;
+                }
+            });
+
+            if(idx != null) {
+                data.splice(idx, 1);
+                this.setState({
+                    data: data,
+                    dataSource: this.listDataSource.cloneWithRows(data),
+                    count: data.length
+                });
+            }
         });
     }
-
-    // NativeModules.MediaHelper.downloadCompleteNotification();
     notification(){
         NativeModules.MediaHelper.downloadNotification();
     }
     share(){
+        NativeModules.MediaHelper.touch();
         NativeModules.MediaHelper.share();
     }
 
@@ -175,8 +179,8 @@ this.end = 50;
                             <TouchableOpacity onPress={() => this.playQueue(rowData)}>
                                 <Icon name={playIcon} style={[styles.playerIcon]} size={23} color="#FFF" />
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => this.download(rowData)}>
-                                <Icon name="android-download" style={[styles.playerIcon]} size={23} color="#FFF" />
+                            <TouchableOpacity onPress={() => this.deleteFavourites(rowData)}>
+                                <Icon name="trash-a" style={[styles.playerIcon]} size={23} color="#FFF" />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={this.share.bind(this)}>
                                 <Icon name="android-share-alt" style={[styles.playerIcon]} size={23} color="#FFF" />

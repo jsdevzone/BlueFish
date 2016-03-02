@@ -26,11 +26,11 @@ export var CategoryStore = Object.assign({}, EventEmitter.prototype, {
      * Get the new & trending category songs list
      * @return {Promise} promise
      */
-    getLatestAlbums: function() {
+    getLatestAlbums: function(start, end) {
         let params = {
             lang: 'en',
-            stcnt: 0,
-            encnt: 10,
+            stcnt: start || 0,
+            encnt: end || 50,
             listtype: 'audio',
             subfilter: ''
         };
@@ -69,6 +69,30 @@ export var CategoryStore = Object.assign({}, EventEmitter.prototype, {
             encnt: 5000,
             listtype: 'author',
             subfilter: ''
+        };
+        let promise = RequestManager.get(params);
+        return promise;
+    },
+
+    getCategoryPlaybacks: function(id) {
+        let params = {
+            lang:'en',
+            stcnt:0,
+            encnt:10,
+            listtype:'category',
+            subfilter:id
+        };
+        let promise = RequestManager.get(params);
+        return promise;
+    },
+
+    getAuthorPlaybacks: function(authorId) {
+        let params = {
+            lang:'en',
+            stcnt:0,
+            encnt:10,
+            listtype:'author',
+            subfilter: authorId
         };
         let promise = RequestManager.get(params);
         return promise;

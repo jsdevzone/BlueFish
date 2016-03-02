@@ -8,9 +8,8 @@
 
 import { AsyncStorage, ToastAndroid, } from 'react-native';
 import { EventEmitter } from 'events';
-
 import { AppConfig } from '../constants/AppConfig';
-
+import { PropertyExtractor } from '../core/PropertyExtractor';
 /**
  * App Store is flux store. This store serves as skeleton for server side data  service
  * for the application.
@@ -21,6 +20,8 @@ import { AppConfig } from '../constants/AppConfig';
  * @singleton
  */
 export var AppStore = Object.assign({}, EventEmitter.prototype, {
+
+    playback: null,
     /**
      * Load the settings from local storage.
      * @return {Promise} promise
@@ -35,11 +36,20 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
      * @return {Void} undefined
      */
     startPlayback: function(playback) {
+        this.playback = playback;
         this.emit('playbackstarted', playback);
     },
 
     loadPlayback: function(playback) {
         this.emit('playbackloaded', playback);
+    },
+
+    pausePlayback: function(playback) {
+        this.emit('playbackpaused', playback)
+    },
+
+    resumePlayback: function(playback) {
+        this.emit('playbackresumed', playback)
     },
 
     /**
@@ -56,5 +66,45 @@ export var AppStore = Object.assign({}, EventEmitter.prototype, {
      */
     openDrawer: function() {
         this.emit('draweropen');
+    },
+
+    addToPlaylist: function(playback) {
+        let key = '@UruduAudio:playlist';
+        AsyncStorage.getItem(key).then(playlist => {
+            if(!playlist)
+                playlist = new Array();
+            else
+                playlist = JSON.parse(playlist);
+
+            playlist.push(playback);
+            AsyncStorage.setItem(key, JSON.stringify(playlist));
+        });
+    },
+
+    getPlaylist: function(callback) {
+        let key = '@UruduAudio:playlist';
+        AsyncStorage.getItem(key).then(playlist => {
+            var favourites = JSON.parse(playlist);
+            callback(favourites);
+        });
+    },
+
+    tes: function(){},
+
+    deletePlayback: function(playback, callback) {
+        let key = '@UruduAudio:playlist';
+        AsyncStorage.getItem(key).then(playlist => {
+            let $playList = JSON.parse(playlist);
+            let idx = null;
+            $playList.map((item, index) => {
+                if(PropertyExtractor.getProperty(playback, 'id') == PropertyExtractor.getProperty(item, 'id')) {
+                    idx = index;
+                }
+            });
+            $playList.splice(idx,1);
+            AsyncStorage.setItem(key, JSON.stringify($playList)).then(()=>{
+                callback();
+            })
+        });
     }
 });

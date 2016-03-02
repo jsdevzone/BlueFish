@@ -6,8 +6,16 @@
  */
 'use strict';
 
-import React, { Text, View, StyleSheet, Image, ScrollView, TouchableWithoutFeedback,  } from 'react-native';
+import React, { Text, View, StyleSheet, Image, ScrollView, TouchableWithoutFeedback,TouchableOpacity,NativeModules  } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { LandingPage } from './LandingPage';
+import { SlidingQueue } from '../player/SlidingQueue';
+import { SongCategories } from './SongCategories';
+import { Collections } from '../player/Collections';
+import { Videos } from '../player/Videos';
+import { AboutUs } from './AboutUs';
+import { ContactUs } from './ContactUs';
+import { Favourites } from './Favourites';
 /**
  * @class DrawerNavigation
  * @extends React.Component
@@ -39,6 +47,38 @@ export class DrawerNavigation extends React.Component {
          );
      }
 
+     onHome(){
+         NativeModules.MediaHelper.touch();
+         this.props.navigator.push({ title: 'Home', component: LandingPage, props: { navigator: this.props.navigator }});
+     }
+     onLatestAudios(){
+         NativeModules.MediaHelper.touch();
+         this.props.navigator.push({ title: 'LatestAudio', component: SlidingQueue, props: { navigator: this.props.navigator }});
+     }
+     onCategories(){
+         NativeModules.MediaHelper.touch();
+         this.props.navigator.push({ title: 'Categories', component: SongCategories, props: { navigator: this.props.navigator }});
+     }
+     onCollections(){
+         NativeModules.MediaHelper.touch();
+         this.props.navigator.push({ title: 'collections', component: Collections, props: { navigator: this.props.navigator }});
+     }
+     onVideo(){
+         NativeModules.MediaHelper.touch();
+         this.props.navigator.push({ title: 'Videos', component: Videos, props: { navigator: this.props.navigator }});
+     }
+     onAbout(){
+         NativeModules.MediaHelper.touch();
+         this.props.navigator.push({ title: 'About', component: AboutUs, props: { navigator: this.props.navigator }});
+     }
+     onContact(){
+         NativeModules.MediaHelper.touch();
+         this.props.navigator.push({ title: 'Contact', component: ContactUs, props: { navigator: this.props.navigator }});
+     }
+     onMyPlaylist(){
+         NativeModules.MediaHelper.touch();
+         this.props.navigator.push({ title: 'Playlist', component: Favourites, props: { navigator: this.props.navigator }});
+     }
     /**
      * @render
      * @return {View} container
@@ -48,80 +88,110 @@ export class DrawerNavigation extends React.Component {
             <ScrollView style={{flex: 1}}>
             <Image style={styles.container} source={require('../../../resource/images/gradient-diamond-blur6.png')}>
                 <View style={{height:80,alignItems:'center',borderBottomWidth:0.5,borderBottomColor:'#FFF'}}>
+                    <Icon style={{marginTop:20}} name="toggle-off" color="#FFF" size={45} />
                 </View>
+
+                <TouchableOpacity onPress={this.onHome.bind(this)}>
+                    <View style={styles.navItem}>
+                        <Icon style={styles.navItemIcon} name="home" color="#FFF" size={23} />
+                        <Text style={styles.navItemText}>Home</Text>
+                        <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={this.onLatestAudios.bind(this)}>
+                    <View style={styles.navItem}>
+                        <Icon style={styles.navItemIcon} name="bullhorn" color="#FFF" size={23} />
+                        <Text style={styles.navItemText}>Latest Audios</Text>
+                        <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={this.onCategories.bind(this)}>
+                    <View style={styles.navItem}>
+                        <Icon style={styles.navItemIcon} name="bars" color="#FFF" size={23} />
+                        <Text style={styles.navItemText}>Categories</Text>
+                        <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={this.onCollections.bind(this)}>
+                    <View style={styles.navItem}>
+                        <Image style={styles.navItemIcon} source={require('../../../resource/images/collections.png')} />
+                        <Text style={styles.navItemText}>Collections</Text>
+                        <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={this.onVideo.bind(this)}>
+                    <View style={styles.navItem}>
+                        <Icon style={styles.navItemIcon} name="video-camera" color="#FFF" size={23} />
+                        <Text style={styles.navItemText}>Videos</Text>
+                        <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={this.onLatestAudios.bind(this)}>
+                    <View style={styles.navItem}>
+                        <Icon style={styles.navItemIcon} name="binoculars" color="#FFF" size={23} />
+                        <Text style={styles.navItemText}>Surprise Me</Text>
+                        <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={this.onMyPlaylist.bind(this)}>
+                    <View style={styles.navItem}>
+                        <Image style={styles.navItemIcon} source={require('../../../resource/images/addplaylist.png')} />
+                        <Text style={styles.navItemText}>My Playlist</Text>
+                        <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
+                    </View>
+                </TouchableOpacity>
+
                 <View style={styles.navItem}>
-                    <Icon style={{marginLeft:15,width:23,height:23}} name="home" color="#FFF" size={23} />
-                    <Text style={styles.navItemText}>Home</Text>
-                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
-                </View>
-                <View style={styles.navItem}>
-                    <Icon style={{marginLeft:15,width:23,height:23}} name="bullhorn" color="#FFF" size={23} />
-                    <Text style={styles.navItemText}>Latest Audios</Text>
-                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
-                </View>
-                <View style={styles.navItem}>
-                    <Icon style={{marginLeft:15,width:23,height:23}} name="bars" color="#FFF" size={23} />
-                    <Text style={styles.navItemText}>Categories</Text>
-                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
-                </View>
-                <View style={styles.navItem}>
-                    <Image style={{marginLeft:15,width:24,height:24}} source={require('../../../resource/images/collections.png')} />
-                    <Text style={styles.navItemText}>Collections</Text>
-                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
-                </View>
-                <View style={styles.navItem}>
-                    <Icon style={{marginLeft:15,width:23,height:23}} name="video-camera" color="#FFF" size={23} />
-                    <Text style={styles.navItemText}>Videos</Text>
-                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
-                </View>
-                <View style={styles.navItem}>
-                    <Icon style={{marginLeft:15,width:23,height:23}} name="binoculars" color="#FFF" size={23} />
-                    <Text style={styles.navItemText}>Surprise Me</Text>
-                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
-                </View>
-                <View style={styles.navItem}>
-                    <Image style={{marginLeft:15,width:25,height:25}} source={require('../../../resource/images/addplaylist.png')} />
-                    <Text style={styles.navItemText}>My Playlist</Text>
-                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
-                </View>
-                <View style={styles.navItem}>
-                    <Icon style={{marginLeft:15,width:23,height:23}} name="cog" color="#FFF" size={23} />
+                    <Icon style={styles.navItemIcon} name="cog" color="#FFF" size={23} />
                     <Text style={styles.navItemText}>Settings</Text>
                     <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
                 </View>
+
+                <TouchableOpacity onPress={this.onContact.bind(this)}>
+                    <View style={styles.navItem}>
+                        <Icon style={{marginLeft:15,width:23,height:23}} name="share-square-o" color="#FFF" size={23} />
+                        <Text style={styles.navItemText}>Contact Us</Text>
+                        <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={this.onAbout.bind(this)}>
+                    <View style={styles.navItem}>
+                        <Icon style={styles.navItemIcon} name="info-circle" color="#FFF" size={23} />
+                        <Text style={styles.navItemText}>About</Text>
+                        <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
+                    </View>
+                </TouchableOpacity>
+
                 <View style={styles.navItem}>
-                    <Icon style={{marginLeft:15,width:23,height:23}} name="share-square-o" color="#FFF" size={23} />
-                    <Text style={styles.navItemText}>Contact Us</Text>
-                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
-                </View>
-                <View style={styles.navItem}>
-                    <Icon style={{marginLeft:15,width:23,height:23}} name="info-circle" color="#FFF" size={23} />
-                    <Text style={styles.navItemText}>About</Text>
-                    <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
-                </View>
-                <View style={styles.navItem}>
-                    <Icon style={{marginLeft:15,width:23,height:23}} name="question-circle" color="#FFF" size={23} />
+                    <Icon style={styles.navItemIcon} name="question-circle" color="#FFF" size={23} />
                     <Text style={styles.navItemText}>Tutorial</Text>
                     <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
                 </View>
                 <View style={styles.navItem}>
-                    <Icon style={{marginLeft:15,width:23,height:23}} name="share-alt" color="#FFF" size={23} />
+                    <Icon style={styles.navItemIcon} name="share-alt" color="#FFF" size={23} />
                     <Text style={styles.navItemText}>Share this App</Text>
                     <Icon style={{marginLeft:25}} name="angle-right" color="#FFF" size={23} />
                 </View>
 
                 <View style={styles.socialIconsWrapper}>
                     <View style={styles.socialIcon}>
-                        <Image style={{width:30,height:30,borderRadius:50,borderColor:'#FFF',borderWidth:2}} source={require('../../../resource/images/social-facebook.png')} />
+                        <Image style={styles.socialImage} source={require('../../../resource/images/social-facebook.png')} />
                     </View>
                     <View style={styles.socialIcon}>
                         <Image style={{width:30,height:30,borderRadius:50,borderColor:'#FFF',borderWidth:2}} source={require('../../../resource/images/social-twitter.png')} />
                     </View>
                     <View style={styles.socialIcon}>
-                        <Image style={{width:30,height:30,borderRadius:50,borderColor:'#FFF',borderWidth:2}} source={require('../../../resource/images/social-google.png')} />
+                        <Image style={styles.socialImage} source={require('../../../resource/images/social-google.png')} />
                     </View>
                     <View style={styles.socialIcon}>
-                        <Image style={{width:30,height:30,borderRadius:50,borderColor:'#FFF',borderWidth:2}} source={require('../../../resource/images/social-youtube.png')} />
+                        <Image style={styles.socialImage} source={require('../../../resource/images/social-youtube.png')} />
                     </View>
                 </View>
 
@@ -170,6 +240,11 @@ const styles = StyleSheet.create({
         fontSize:15,
         marginLeft:60
     },
+    navItemIcon:{
+        marginLeft:15,
+        width:23,
+        height:23
+    },
     helpBtn: {
         padding: 10,
         backgroundColor: '#253C54',
@@ -202,10 +277,16 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30,
         borderRadius: 20,
-        backgroundColor: '#10263D',
         justifyContent: 'center',
         alignItems: 'center',
         marginRight: 10
+    },
+    socialImage:{
+        width:30,
+        height:30,
+        borderRadius:50,
+        borderColor:'#FFF',
+        borderWidth:2
     },
 
 });

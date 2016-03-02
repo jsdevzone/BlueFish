@@ -23,7 +23,7 @@ export class Advertisement extends React.Component {
      render() {
          return (
              <View style={[styles.container]}>
-                <Text style={{color: '#FFF'}}>Ad Banner</Text>
+                <Text style={styles.text}>Ad Banner</Text>
              </View>
          );
      }
@@ -38,5 +38,8 @@ const styles = StyleSheet.create({
         height: 50,
         alignItems: 'center',
         justifyContent: 'center'
-     }
+    },
+    text: {
+        color:'#FFF'
+    }
 });

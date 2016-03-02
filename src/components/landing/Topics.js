@@ -6,7 +6,7 @@
  */
 'use strict';
 
-import React, { Text, View, StyleSheet, ScrollView, TouchableWithoutFeedback, ToastAndroid } from 'react-native';
+import React, { Text, View, StyleSheet, ScrollView, TouchableWithoutFeedback, ToastAndroid,NativeModules } from 'react-native';
 import { CoverTile } from '../shared/CoverTile';
 import { CategoryStore } from '../../stores/CategoryStore';
 import { PropertyExtractor } from '../../core/PropertyExtractor';
@@ -39,6 +39,7 @@ export class Topics extends React.Component {
     }
 
     onCategoryPress(category) {
+        NativeModules.MediaHelper.touch();
         this.props.navigator.push({ id:'', title: '', component: null, props: { category: category } });
     }
 

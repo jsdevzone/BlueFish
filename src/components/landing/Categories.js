@@ -6,7 +6,7 @@
  */
 'use strict';
 
-import React, { Text, View, StyleSheet, ScrollView, ListView, TouchableWithoutFeedback,Image } from 'react-native';
+import React, { Text, View, StyleSheet, ScrollView, ListView, TouchableWithoutFeedback,Image,NativeModules } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { CoverTile } from '../shared/CoverTile';
 import { CategoryStore } from '../../stores/CategoryStore';
@@ -59,6 +59,7 @@ export class Categories extends React.Component {
     }
 
     onCategoryPress(category) {
+        NativeModules.MediaHelper.touch();
         this.props.navigator.push({ title: 'New Releases', component: SlidingQueue, props: { navigator: this.props.navigator } });
     }
 
