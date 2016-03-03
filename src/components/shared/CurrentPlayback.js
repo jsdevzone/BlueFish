@@ -52,20 +52,20 @@ import { AppStore } from '../../stores/AppStore';
     }
 
     onPlaybackPaused(playback) {
-        this.setState({ isPlaying: false, isPaused: true })
+        this.setState({ isPlaying: false, isPaused: true });
     }
     onSong(){
         let playback = this.props.playback;
 
         if(!this.state.isPaused) {
             NativeModules.MediaHelper.resume();
-            this.setState({ isPaused: true, isPlaying: true });
+            this.setState({ isPlaying: true, isPaused: true });
             AppStore.resumePlayback(playback);
             ToastAndroid.show('resumed',ToastAndroid.LONG);
         }
         else {
             NativeModules.MediaHelper.pause();
-            this.setState({ isPaused: false });
+            this.setState({ isPlaying: false, isPaused: false });
             AppStore.pausePlayback(playback);
             ToastAndroid.show('Pused',ToastAndroid.LONG);
         }
